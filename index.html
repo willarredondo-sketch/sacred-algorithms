@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sacred Algorithms — A global movement for leaders, organizations, and communities committed to technology that elevates humanity. Founded by Will Arredondo.">
+  <title>Sacred Algorithms | Where Soul Meets Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --navy:      #051C3A;
+      --navy-mid:  #081F42;
+      --purple:    #7B69A8;
+      --gold:      #C48D59;
+      --gold-lt:   #D4A070;
+      --white:     #F4F1EC;
+      --text:      #CCCAD4;
+      --muted:     #8E8A98;
+      --border:    rgba(123,105,168,0.22);
+      --card-bg:   rgba(255,255,255,0.035);
+      --card-hover:rgba(255,255,255,0.065);
+      --font-d: 'Cormorant Garamond', Georgia, serif;
+      --font-b: 'Inter', system-ui, sans-serif;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--gold); text-decoration: none; transition: color .2s var(--ease); }
+    a:hover { color: var(--gold-lt); }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(5,28,58,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: var(--font-d);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .nav-brand span {
+      display: block;
+      font-style: italic;
+      font-size: 0.7rem;
+      font-family: var(--font-b);
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.5rem 1.25rem;
+      transition: all .2s var(--ease);
+      cursor: pointer;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--text); transition: all .3s; }
+
+    /* ── SECTIONS ───────────────────────────────────────── */
+    section { display: none; }
+    section.active { display: block; }
+
+    /* ── SHARED LAYOUT ──────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+    .section-wrap { padding: 8rem 0 5rem; }
+    .section-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-d); font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .divider {
+      width: 48px; height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 1.5rem 0;
+    }
+    .section-intro {
+      font-size: 1.05rem; line-height: 1.85;
+      max-width: 640px; color: var(--text);
+    }
+
+    /* ── HOME ───────────────────────────────────────────── */
+    #home { display: block; }
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #020C1A 0%, var(--navy) 55%, #071830 100%);
+    }
+    .hero-metatron {
+      position: absolute; right: -3%; top: 50%;
+      transform: translateY(-50%);
+      width: min(580px, 68vw); opacity: 0.042;
+      color: var(--purple);
+      pointer-events: none; user-select: none;
+    }
+    .hero-content { position: relative; z-index: 2; padding: 8rem 0 6rem; }
+    .hero-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1px; background: var(--gold);
+    }
+    .hero-name {
+      font-family: var(--font-d);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300; color: var(--white);
+      line-height: 0.92; letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--purple);
+    }
+    .hero-tagline {
+      font-family: var(--font-d);
+      font-style: italic; font-weight: 300;
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      color: var(--purple); margin-bottom: 2.5rem;
+      letter-spacing: 0.01em;
+    }
+    .hero-statement {
+      font-family: var(--font-d);
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.6; max-width: 620px;
+      margin-bottom: 1rem; border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 0.95rem; line-height: 1.85;
+      max-width: 560px; color: var(--text);
+      margin-bottom: 3rem; padding-left: 1.5rem;
+      border-left: 2px solid transparent;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.85rem 2rem;
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--gold); color: var(--gold);
+      transition: all .25s var(--ease); cursor: pointer;
+      background: transparent; font-family: var(--font-b);
+    }
+    .btn:hover { background: var(--gold); color: var(--navy); }
+    .btn-ghost {
+      border-color: rgba(123,105,168,0.4); color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--white); background: rgba(123,105,168,0.08); }
+    .hero-scroll {
+      position: absolute; bottom: 3rem; right: 2.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); cursor: pointer;
+    }
+    .hero-scroll::after {
+      content: ''; display: block;
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+    }
+
+    /* MANIFESTO STRIP */
+    .manifesto {
+      padding: 5rem 0;
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .manifesto-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: start;
+    }
+    .manifesto-heading {
+      font-family: var(--font-d);
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.2; letter-spacing: -0.02em;
+    }
+    .manifesto-heading em { font-style: italic; color: var(--purple); }
+    .manifesto-body { font-size: 1rem; line-height: 1.9; }
+    .manifesto-body p + p { margin-top: 1.1rem; }
+
+    /* THREE PILLARS */
+    .pillars { padding: 5rem 0; }
+    .pillars-heading {
+      font-family: var(--font-d);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 300; color: var(--white);
+      text-align: center; margin-bottom: 3rem; letter-spacing: -0.01em;
+    }
+    .pillar-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.25rem 2rem;
+      transition: background .25s, box-shadow .25s;
+    }
+    .pillar-card:hover {
+      background: var(--card-hover);
+      box-shadow: 0 0 40px rgba(123,105,168,0.1);
+    }
+    .pillar-num {
+      font-family: var(--font-d);
+      font-size: 2.8rem; font-weight: 300;
+      color: var(--gold); opacity: 0.4;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .pillar-title {
+      font-family: var(--font-d);
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--white); margin-bottom: 0.75rem;
+    }
+    .pillar-body { font-size: 0.9rem; line-height: 1.8; }
+
+    /* ── MOVEMENT ───────────────────────────────────────── */
+    .movement-grid {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .movement-body { font-size: 1rem; line-height: 1.9; }
+    .movement-body p + p { margin-top: 1.1rem; }
+    .movement-body strong { color: var(--white); font-weight: 500; }
+    .movement-vision {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    .movement-vision-title {
+      font-family: var(--font-d);
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--gold); margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .movement-vision ul {
+      list-style: none; display: flex; flex-direction: column; gap: 0.85rem;
+    }
+    .movement-vision li {
+      font-size: 0.92rem; line-height: 1.7;
+      padding-left: 1.25rem; position: relative;
+    }
+    .movement-vision li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold); opacity: 0.7;
+    }
+    .name-decoded {
+      background: linear-gradient(135deg, rgba(123,105,168,0.08), rgba(196,141,89,0.05));
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+    .name-decoded-title {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .name-item {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 1rem; margin-bottom: 1.25rem; align-items: start;
+    }
+    .name-word {
+      font-family: var(--font-d);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--white); line-height: 1.2;
+    }
+    .name-def { font-size: 0.88rem; line-height: 1.7; color: var(--text); }
+    .name-item-combined {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem; margin-top: 0.5rem;
+    }
+    .name-combined-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .name-combined-def {
+      font-family: var(--font-d);
+      font-size: 1.1rem; font-weight: 300;
+      color: var(--white); line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* ── FOUNDER ────────────────────────────────────────── */
+    .founder-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .founder-body { font-size: 1rem; line-height: 1.9; }
+    .founder-body p + p { margin-top: 1.1rem; }
+    .founder-name {
+      font-family: var(--font-d);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1; letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .founder-title {
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+    }
+    .credentials {
+      margin-top: 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .credential-item {
+      display: grid; grid-template-columns: 1.5rem 1fr;
+      gap: 0.75rem; align-items: start;
+      font-size: 0.88rem; line-height: 1.6;
+    }
+    .credential-item::before {
+      content: '—'; color: var(--gold); margin-top: 0.05rem;
+    }
+    .credential-item strong { color: var(--white); font-weight: 500; }
+    .strengths {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2rem; margin-top: 2rem;
+    }
+    .strengths-label {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.25rem;
+    }
+    .strengths-list {
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .strength-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--text);
+    }
+    .strength-tag::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--purple);
+      flex-shrink: 0;
+    }
+    .unfair-grid {
+      margin-top: 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .unfair-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: background .25s, box-shadow .25s;
+    }
+    .unfair-card:hover {
+      background: var(--card-hover);
+      box-shadow: 0 0 30px rgba(123,105,168,0.1);
+    }
+    .unfair-num {
+      font-family: var(--font-d);
+      font-size: 2rem; font-weight: 300;
+      color: var(--gold); opacity: 0.4;
+      line-height: 1; margin-bottom: 0.75rem;
+    }
+    .unfair-title {
+      font-family: var(--font-d);
+      font-size: 1.25rem; font-weight: 400;
+      color: var(--white); margin-bottom: 0.65rem;
+    }
+    .unfair-body { font-size: 0.88rem; line-height: 1.75; }
+
+    /* ── THE WORK ───────────────────────────────────────── */
+    .work-intro {
+      max-width: 680px; margin-bottom: 4rem;
+    }
+    .work-intro-text {
+      font-family: var(--font-d);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.6; margin-bottom: 1rem;
+      border-left: 2px solid var(--gold); padding-left: 1.5rem;
+    }
+    .work-intro-sub { font-size: 0.95rem; line-height: 1.85; }
+    .stages { display: flex; flex-direction: column; gap: 1.5px; }
+    .stage {
+      display: grid; grid-template-columns: 5rem 1fr;
+      gap: 0; border: 1px solid var(--border);
+      margin-bottom: 0;
+      transition: background .25s;
+      background: var(--card-bg);
+    }
+    .stage:hover { background: var(--card-hover); }
+    .stage + .stage { border-top: none; }
+    .stage-num {
+      display: flex; align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 0 2rem;
+      border-right: 1px solid var(--border);
+      font-family: var(--font-d);
+      font-size: 2.5rem; font-weight: 300;
+      color: var(--gold); opacity: 0.35;
+      line-height: 1;
+    }
+    .stage-content { padding: 2rem 2.25rem; }
+    .stage-tag {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 0.4rem;
+    }
+    .stage-title {
+      font-family: var(--font-d);
+      font-size: 1.45rem; font-weight: 300;
+      color: var(--white); margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .stage-body { font-size: 0.9rem; line-height: 1.8; }
+    .work-cta {
+      margin-top: 3.5rem; text-align: center;
+      padding: 3rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    .work-cta-text {
+      font-family: var(--font-d);
+      font-size: 1.4rem; font-weight: 300;
+      color: var(--white); margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+
+    /* ── WHO WE SERVE ───────────────────────────────────── */
+    .personas { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+    .persona {
+      display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 0;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      transition: background .25s, box-shadow .25s;
+    }
+    .persona:hover {
+      background: var(--card-hover);
+      box-shadow: 0 4px 40px rgba(5,28,58,0.5);
+    }
+    .persona-left {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .persona-num {
+      font-family: var(--font-d);
+      font-size: 3rem; font-weight: 300;
+      color: var(--gold); opacity: 0.3;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .persona-name {
+      font-family: var(--font-d);
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--white); line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .persona-target {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+    }
+    .persona-center {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .persona-friction-label {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .persona-friction-head {
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .persona-friction-body { font-size: 0.88rem; line-height: 1.75; margin-bottom: 1.5rem; }
+    .persona-right { padding: 2.5rem 2rem; }
+    .persona-pain-label {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 0.75rem;
+    }
+    .persona-pain-head {
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .persona-pain-body { font-size: 0.88rem; line-height: 1.75; }
+
+    /* ── MEDIA ──────────────────────────────────────────── */
+    .media-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;
+    }
+    .media-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      transition: background .25s, box-shadow .25s;
+    }
+    .media-card:hover {
+      background: var(--card-hover);
+      box-shadow: 0 0 40px rgba(123,105,168,0.1);
+    }
+    .media-type {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .media-title {
+      font-family: var(--font-d);
+      font-size: 1.7rem; font-weight: 300;
+      color: var(--white); margin-bottom: 0.75rem;
+      letter-spacing: -0.01em; line-height: 1.2;
+    }
+    .media-body { font-size: 0.92rem; line-height: 1.8; margin-bottom: 2rem; }
+    .media-meta {
+      font-size: 0.78rem; color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CONTACT ────────────────────────────────────────── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem;
+      align-items: start;
+    }
+    .contact-intro { font-size: 0.95rem; line-height: 1.85; }
+    .contact-intro p + p { margin-top: 1rem; }
+    .contact-ways { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-way {
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .contact-way-label {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-way-value { font-size: 0.92rem; color: var(--text); }
+    form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    label {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    input, textarea, select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 0.92rem; font-weight: 300;
+      padding: 0.85rem 1rem;
+      width: 100%;
+      transition: border-color .2s, background .2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(196,141,89,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    select option { background: var(--navy); }
+    .form-success {
+      display: none; text-align: center; padding: 3rem 2rem;
+      border: 1px solid rgba(196,141,89,0.3);
+      background: rgba(196,141,89,0.05);
+    }
+    .form-success h3 {
+      font-family: var(--font-d); font-size: 1.8rem;
+      font-weight: 300; color: var(--white); margin-bottom: 0.75rem;
+    }
+    .form-success p { font-size: 0.95rem; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      position: relative; overflow: hidden;
+      background: #030E1E;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2.5rem;
+    }
+    .footer-metatron {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      width: min(400px, 80vw); opacity: 0.025;
+      color: var(--purple);
+      pointer-events: none;
+    }
+    .footer-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 4rem; margin-bottom: 3rem;
+    }
+    .footer-brand {
+      font-family: var(--font-d);
+      font-size: 1.2rem; font-weight: 300;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .footer-tagline {
+      font-style: italic; font-family: var(--font-d);
+      font-size: 0.9rem; color: var(--purple); margin-bottom: 1.25rem;
+    }
+    .footer-mission { font-size: 0.85rem; line-height: 1.75; max-width: 320px; }
+    .footer-col h4 {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.25rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-col li { font-size: 0.85rem; }
+    .footer-col a { color: var(--text); }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding-top: 1.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── MOBILE NAV ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav {
+        display: none; position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(5,28,58,0.98);
+        z-index: 99; flex-direction: column;
+        align-items: center; justify-content: center; gap: 2rem;
+      }
+      .mobile-nav.open { display: flex; }
+      .mobile-nav a {
+        font-size: 1.2rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--text);
+        font-weight: 300;
+      }
+      .mobile-nav a:hover { color: var(--gold); }
+      .mobile-close {
+        position: absolute; top: 1.5rem; right: 1.5rem;
+        font-size: 1.5rem; color: var(--muted); cursor: pointer;
+        background: none; border: none;
+      }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .container { padding: 0 1.5rem; }
+      .section-wrap { padding: 6rem 0 4rem; }
+      .manifesto-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .movement-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .founder-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .unfair-grid { grid-template-columns: 1fr; }
+      .persona { grid-template-columns: 1fr; }
+      .persona-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .persona-center { border-right: none; border-bottom: 1px solid var(--border); }
+      .media-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+      .stage { grid-template-columns: 3.5rem 1fr; }
+      .hero-metatron { opacity: 0.03; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <div class="nav-brand" onclick="show('home')">
+    Sacred Algorithms
+    <span>Where Soul Meets Strategy</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" data-section="movement" onclick="return show('movement')">The Movement</a></li>
+    <li><a href="#" data-section="founder" onclick="return show('founder')">The Founder</a></li>
+    <li><a href="#" data-section="work" onclick="return show('work')">The Work</a></li>
+    <li><a href="#" data-section="serve" onclick="return show('serve')">Who We Serve</a></li>
+    <li><a href="#" data-section="media" onclick="return show('media')">Media</a></li>
+  </ul>
+  <a class="nav-cta" href="#" onclick="return show('contact')">Work With Will</a>
+  <button class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-close" onclick="document.getElementById('mobile-nav').classList.remove('open')">✕</button>
+  <a href="#" onclick="show('movement'); document.getElementById('mobile-nav').classList.remove('open')">The Movement</a>
+  <a href="#" onclick="show('founder'); document.getElementById('mobile-nav').classList.remove('open')">The Founder</a>
+  <a href="#" onclick="show('work'); document.getElementById('mobile-nav').classList.remove('open')">The Work</a>
+  <a href="#" onclick="show('serve'); document.getElementById('mobile-nav').classList.remove('open')">Who We Serve</a>
+  <a href="#" onclick="show('media'); document.getElementById('mobile-nav').classList.remove('open')">Media</a>
+  <a href="#" onclick="show('contact'); document.getElementById('mobile-nav').classList.remove('open')">Work With Will</a>
+</div>
+
+<!-- ── HOME ───────────────────────────────────────────── -->
+<section id="home" class="active">
+
+  <div class="hero">
+    <!-- Metatron's Cube SVG -->
+    <svg class="hero-metatron" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="0.6" aria-hidden="true">
+      <!-- Outer circle -->
+      <circle cx="250" cy="250" r="220"/>
+      <!-- Inner circle ring -->
+      <circle cx="250" cy="250" r="110"/>
+      <!-- 6 surrounding circles radius 110 -->
+      <circle cx="250" cy="140" r="110"/>
+      <circle cx="250" cy="360" r="110"/>
+      <circle cx="345.4" cy="195" r="110"/>
+      <circle cx="154.6" cy="195" r="110"/>
+      <circle cx="345.4" cy="305" r="110"/>
+      <circle cx="154.6" cy="305" r="110"/>
+      <!-- Center point circles (small) -->
+      <circle cx="250" cy="250" r="4" fill="currentColor" stroke="none"/>
+      <!-- Star of David lines -->
+      <line x1="250" y1="30" x2="250" y2="470"/>
+      <line x1="57" y1="155" x2="443" y2="345"/>
+      <line x1="443" y1="155" x2="57" y2="345"/>
+      <!-- Additional connecting lines -->
+      <line x1="250" y1="140" x2="345.4" y2="305"/>
+      <line x1="345.4" y1="305" x2="154.6" y2="305"/>
+      <line x1="154.6" y1="305" x2="250" y2="140"/>
+      <line x1="250" y1="360" x2="345.4" y2="195"/>
+      <line x1="345.4" y1="195" x2="154.6" y2="195"/>
+      <line x1="154.6" y1="195" x2="250" y2="360"/>
+      <!-- Outer hexagon -->
+      <polygon points="250,30 443,155 443,345 250,470 57,345 57,155"/>
+      <!-- Inner hexagon -->
+      <polygon points="250,140 345.4,195 345.4,305 250,360 154.6,305 154.6,195"/>
+    </svg>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label">A Movement for Human-Centered Technology</div>
+        <h1 class="hero-name">Sacred<br><em>Algorithms</em></h1>
+        <p class="hero-tagline">Where Soul Meets Strategy</p>
+        <blockquote class="hero-statement">
+          Technology exists to elevate humanity — not automate it away.
+        </blockquote>
+        <p class="hero-sub">
+          A global movement uniting leaders, organizations, and communities around one conviction: that the algorithms governing our world should be designed with intention, ethics, and reverence for human life.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn" href="#" onclick="return show('movement')">Explore the Movement</a>
+          <a class="btn btn-ghost" href="#" onclick="return show('contact')">Work With Will</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" onclick="show('movement')">Discover</div>
+  </div>
+
+  <!-- Manifesto Strip -->
+  <div class="manifesto">
+    <div class="container">
+      <div class="manifesto-inner">
+        <div>
+          <h2 class="manifesto-heading">
+            Technology is scaling faster than<br>
+            <em>our wisdom to wield it.</em>
+          </h2>
+        </div>
+        <div class="manifesto-body">
+          <p>
+            As AI, automation, and global digital expansion accelerate, organizations lose alignment between their systems, their people, and their purpose. Data becomes fragmented. Teams lose trust. Brands grow sterile. The organization drifts from its original mission.
+          </p>
+          <p>
+            Sacred Algorithms exists to reverse that drift — to ensure the systems we build are worthy of the humans they serve.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Pillars -->
+  <div class="pillars">
+    <div class="container">
+      <p class="pillars-heading">Three expressions. One movement.</p>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-num">I</div>
+          <h3 class="pillar-title">The Practice</h3>
+          <p class="pillar-body">Strategic consulting that unifies fragmented infrastructure, restores organizational coherence, and deploys AI in ways that amplify human potential — not replace it. Led by founder Will Arredondo.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num">II</div>
+          <h3 class="pillar-title">The Platform</h3>
+          <p class="pillar-body">A growing body of thought leadership — essays, conversations, and frameworks — exploring what it means to lead with technology without losing soul. Via Substack and the Media Refugees podcast.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num">III</div>
+          <h3 class="pillar-title">The Vision</h3>
+          <p class="pillar-body">A chapter-based movement: companies, NGOs, and spiritual institutions worldwide committed to applying technology in service of human dignity, cultural preservation, and collective flourishing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── THE MOVEMENT ────────────────────────────────────── -->
+<section id="movement">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">The Movement</div>
+      <h2 class="section-title">What is<br>Sacred Algorithms?</h2>
+      <div class="divider"></div>
+
+      <div class="movement-grid">
+        <div>
+          <div class="movement-body">
+            <p>
+              Sacred Algorithms is a <strong>global movement</strong> for leaders, organizations, and communities committed to one belief: that technology exists to elevate human life — not diminish it.
+            </p>
+            <p>
+              It is not a software company. It is not a consulting firm. It is a mindset, a discipline, and a growing community of practitioners who refuse to accept the premise that technological progress and human flourishing are in tension.
+            </p>
+            <p>
+              We believe that algorithms — the systems of rules and logic that increasingly govern how we live, work, and connect — can be <strong>sacred</strong>: designed with intention, built with ethics, and measured against a single north star: does this serve humanity?
+            </p>
+            <p>
+              In practice, Sacred Algorithms looks like conscious leaders applying technology to strengthen communities rather than isolate them. It looks like organizations deploying AI to liberate human creativity, not replace it. It looks like brands that scale without losing their soul.
+            </p>
+          </div>
+
+          <div class="movement-vision">
+            <div class="movement-vision-title">The 10-Year Vision</div>
+            <ul>
+              <li>Chapter-based communities within companies, NGOs, and spiritual institutions worldwide</li>
+              <li>A shared commitment to human-first technology governance — from boardrooms to community centers</li>
+              <li>Frameworks, methodologies, and case studies that make ethical tech adoption replicable at scale</li>
+              <li>A global network of leaders who understand that the future of technology is inseparable from the future of humanity</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="name-decoded">
+            <div class="name-decoded-title">The Name, Decoded</div>
+            <div class="name-item">
+              <div class="name-word">Sacred</div>
+              <div class="name-def">Set apart. Treated with reverence. Worthy of protection. To call something sacred is to insist it cannot be reduced to its utility — that its value transcends what it produces.</div>
+            </div>
+            <div class="name-item">
+              <div class="name-word">Algorithms</div>
+              <div class="name-def">Any system of rules or instructions that governs outcomes. Algorithms power your social media feed, your company's hiring decisions, your city's resource allocation. They are increasingly the architecture of human experience.</div>
+            </div>
+            <div class="name-item name-item-combined">
+              <div>
+                <div class="name-combined-label">Together</div>
+                <div class="name-combined-def">"Systems designed as if human dignity is the only metric that matters."</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 2rem; border: 1px solid var(--border); background: var(--card-bg);">
+            <div class="section-label" style="margin-bottom: 1rem;">Why Now</div>
+            <p style="font-size: 0.92rem; line-height: 1.85;">
+              Brazil — ranked #1 globally for loneliness — is a preview of what algorithmic isolation looks like at scale. AI spiritual guides are displacing communal reflection. Elder wisdom struggles to reach younger generations through digital noise. What is happening there is happening everywhere.
+            </p>
+            <p style="font-size: 0.92rem; line-height: 1.85; margin-top: 1rem;">
+              The organizations that will thrive in the next decade are the ones that figure out how to scale technology without automating away their humanity. Sacred Algorithms is the movement that helps them do that.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center;">
+        <a class="btn" href="#" onclick="return show('founder')">Meet the Founder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE FOUNDER ─────────────────────────────────────── -->
+<section id="founder">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">The Founder</div>
+
+      <div class="founder-grid">
+        <div>
+          <h2 class="founder-name">Will<br>Arredondo</h2>
+          <div class="founder-title">AI-Assisted Marketing Strategist · Fractional CMO · Ordained Interfaith Minister</div>
+
+          <div class="founder-body">
+            <p>
+              Will Arredondo has spent two decades building at the intersection of technology, culture, and human connection — across four continents, in three languages, for some of the world's most recognized media and technology brands.
+            </p>
+            <p>
+              His career spans launching Nickelodeon in Brazil, driving marketing for MTV across the Caribbean, leading branding for BBC Studios in Latin America, and architecting enterprise data systems at Amazon Web Services. He is not a technologist who learned to communicate. He is a communicator who mastered technology — and the difference is everything.
+            </p>
+            <p>
+              In 2011, he was ordained as an Interfaith Reverend — deepening his commitment to the belief that spiritual depth and strategic excellence are not opposites. They are, in fact, the same work.
+            </p>
+            <p>
+              Sacred Algorithms is the convergence of everything Will has built toward: a framework for applying technology with intention, and a movement for leaders who believe human flourishing is the only metric worth optimizing for.
+            </p>
+          </div>
+
+          <div class="credentials">
+            <div class="credential-item"><strong>Amazon Web Services</strong> — Enterprise data architecture &amp; lifecycle programs</div>
+            <div class="credential-item"><strong>BBC Studios LATAM</strong> — Brand leadership across Latin America</div>
+            <div class="credential-item"><strong>MTV Caribbean</strong> — Regional marketing strategy</div>
+            <div class="credential-item"><strong>Nickelodeon Brazil</strong> — Market launch &amp; brand development</div>
+            <div class="credential-item"><strong>Ordained Interfaith Minister</strong> — 2011 · Multilingual: English, Spanish, Portuguese</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="strengths">
+            <div class="strengths-label">CliftonStrengths Top 5</div>
+            <div class="strengths-list">
+              <div class="strength-tag"><strong style="color:var(--white)">Strategic</strong> &nbsp;— Recognizes patterns, finds the path through complexity</div>
+              <div class="strength-tag"><strong style="color:var(--white)">Connectedness</strong> &nbsp;— Sees how disparate things are linked; builds bridges</div>
+              <div class="strength-tag"><strong style="color:var(--white)">Responsibility</strong> &nbsp;— Takes psychological ownership of what is committed to</div>
+              <div class="strength-tag"><strong style="color:var(--white)">Futuristic</strong> &nbsp;— Energized by what could be; pulls others toward possibility</div>
+              <div class="strength-tag"><strong style="color:var(--white)">Ideation</strong> &nbsp;— Fascinated by ideas; finds connections between unlike things</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 2rem; border: 1px solid var(--border); background: var(--card-bg);">
+            <div class="section-label" style="margin-bottom: 1rem;">The Positioning Statement</div>
+            <p style="font-family: var(--font-d); font-size: 1.05rem; font-weight: 300; color: var(--white); line-height: 1.65; font-style: italic;">
+              "I build the bridge between complex enterprise infrastructure and core human engagement. When companies rapidly scale technology or deploy AI, they almost always accidentally break their connection to their market and their people. I audit the technical architecture alongside the human workflow to restore complete operational coherence and unlock hidden revenue."
+            </p>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 2rem; border: 1px solid var(--border); background: var(--card-bg);">
+            <div class="section-label" style="margin-bottom: 1rem;">In His Own Words</div>
+            <p style="font-size: 0.92rem; line-height: 1.85;">
+              "I don't see technology as a replacement for humanity. I see it as an architecture that should amplify human consciousness, strengthen mission alignment, and unlock the highest potential of the people inside the system. Ultimately, I help organizations scale without losing their soul."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unfair Advantages -->
+      <div style="margin-top: 4rem;">
+        <div class="section-label" style="margin-bottom: 1.5rem;">The Unfair Advantages</div>
+        <div class="unfair-grid">
+          <div class="unfair-card">
+            <div class="unfair-num">01</div>
+            <h3 class="unfair-title">Multilingual Translation Across Corporate Tribes</h3>
+            <p class="unfair-body">Most strategists speak one language: technical, creative, corporate, or spiritual. Will speaks all four — in the same afternoon, across English, Spanish, and Portuguese. He bridges the gap between engineers, executives, marketers, and community leaders that most consultants cannot even see.</p>
+          </div>
+          <div class="unfair-card">
+            <div class="unfair-num">02</div>
+            <h3 class="unfair-title">Human-Centric AI Orchestration</h3>
+            <p class="unfair-body">Will rejects the premise that AI is a tool for cold automation. He designs AI systems and context layers that prioritize emotional intelligence and human alignment — automating the sterile, high-volume noise to liberate the sacred cognitive bandwidth of the people running the system.</p>
+          </div>
+          <div class="unfair-card">
+            <div class="unfair-num">03</div>
+            <h3 class="unfair-title">Strategic Pattern Recognition</h3>
+            <p class="unfair-body">Supercharged by CliftonStrengths in Strategic, Connectedness, and Futuristic: where others see chaotic data points, Will sees systemic architecture. He recognizes that operational chaos in a business is often a reflection of internal alignment issues within leadership — and treats the root, not the symptom.</p>
+          </div>
+          <div class="unfair-card">
+            <div class="unfair-num">04</div>
+            <h3 class="unfair-title">Lived Experience in Global Complexity</h3>
+            <p class="unfair-body">This framework was not built in an ivory tower. It was forged navigating major markets from São Paulo and Bogotá to London and New York — through massive corporate transformations, independent pivots, and the particular pressure of cross-cultural leadership at scale.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 3.5rem; text-align: center;">
+        <a class="btn" href="#" onclick="return show('work')">See The Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE WORK ─────────────────────────────────────────── -->
+<section id="work">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">The Work</div>
+      <h2 class="section-title">The Sovereign<br>Architecture™</h2>
+      <div class="divider"></div>
+
+      <div class="work-intro">
+        <p class="work-intro-text">
+          Will's consulting practice is the living expression of Sacred Algorithms — a methodology for restoring coherence between technology, leadership, and the humans a business exists to serve.
+        </p>
+        <p class="work-intro-sub">
+          The Sovereign Architecture™ is a six-stage framework developed across two decades of enterprise transformation. It does not patch symptoms. It maps the systemic architecture underneath operational chaos — and rebuilds it in service of mission-aligned growth.
+        </p>
+      </div>
+
+      <div class="stages">
+
+        <div class="stage">
+          <div class="stage-num">1</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage One</div>
+            <h3 class="stage-title">Radical Inventory &amp; Truth Alignment</h3>
+            <p class="stage-body">We begin by stepping out of denial and stating the problem plainly. A comprehensive diagnostic exposes hidden friction, resource leakage, and cultural fragmentation. We map the gap between where the organization currently sits and its true North Star mission — stripping away the "busy-ness" that leaders use as a coping mechanism to avoid confronting unstable operational foundations.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-num">2</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage Two</div>
+            <h3 class="stage-title">Unified Context Layering</h3>
+            <p class="stage-body">We do not look at data as isolated points — we look at it through the lens of Connectedness. Separate, unrelated data streams breed low-trust, chaotic environments. We architect a centralized, unified data layer: by organizing and streamlining enterprise data frameworks, we eliminate cognitive clutter and give the organization a singular, unassailable source of operational truth.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-num">3</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage Three</div>
+            <h3 class="stage-title">Human-Centric AI Orchestration</h3>
+            <p class="stage-body">This is where we inject soul into the machine. We reject cold, sterile automation that treats people like cogs. Instead, we deploy advanced generative AI and optimized workflows to take over the repetitive, low-value noise — freeing up the leadership team's cognitive bandwidth and shifting them out of fight-or-flight survival mode.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-num">4</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage Four</div>
+            <h3 class="stage-title">Communal Resonance &amp; Shared Intelligence</h3>
+            <p class="stage-body">A system is only as strong as the community running it. Siloed departments create political friction and operational stagnation. Using cross-cultural fluency and relational empathy, we build a bridge between technical developers and creative visionaries — aligning the entire team around the unified system so every stakeholder understands the strategic "Why" behind the execution.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-num">5</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage Five</div>
+            <h3 class="stage-title">Continuous Kinetic Feedback Loops</h3>
+            <p class="stage-body">Sovereignty requires constant, unhurried self-regulation. We do not launch a system and walk away — we build an adaptable, living feedback loop. Rigorous KPI monitoring and automated feedback loops track operational health in real time, transforming unexpected anomalies into data for strategic pivots rather than crises.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-num">6</div>
+          <div class="stage-content">
+            <div class="stage-tag">Stage Six</div>
+            <h3 class="stage-title">Mission-Aligned Legacy Expansion</h3>
+            <p class="stage-body">True growth is never "growth at all costs" — it is sustainable, ethical, and designed to lift all boats. With chaos eliminated and human potential unlocked, we execute impactful go-to-market strategies and strategic partnerships. The organization scales its market value exponentially, expanding its legacy while remaining fiercely anchored to its human mission.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="work-cta">
+        <p class="work-cta-text">Ready to restore coherence between your technology, your people, and your mission?</p>
+        <a class="btn" href="#" onclick="return show('contact')">Begin the Conversation</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO WE SERVE ────────────────────────────────────── -->
+<section id="serve">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">Who We Serve</div>
+      <h2 class="section-title">Three Leaders.<br>One Shared Problem.</h2>
+      <div class="divider"></div>
+      <p class="section-intro">
+        Their industries differ. Their geographies differ. But they share the same hidden cost: technology that scaled faster than the human systems meant to wield it.
+      </p>
+
+      <div class="personas">
+
+        <div class="persona">
+          <div class="persona-left">
+            <div class="persona-num">01</div>
+            <div class="persona-name">The Conscious Scale Founder</div>
+            <div class="persona-target">CEOs &amp; founding teams of purpose-driven mid-market enterprises ($10M–$100M) — HealthTech, EdTech, Clean Energy, Ethical AI (Series A)</div>
+          </div>
+          <div class="persona-center">
+            <div class="persona-friction-label">The Technical Friction</div>
+            <div class="persona-friction-head">Fragmented architecture leaking revenue</div>
+            <div class="persona-friction-body">Siloed databases, disconnected CRMs, and disjointed AI plug-ins are causing leaking revenue, broken customer lifecycles, and a mountain of manual, low-value work.</div>
+          </div>
+          <div class="persona-right">
+            <div class="persona-pain-label">The Human Pain</div>
+            <div class="persona-pain-head">Losing their soul as they scale</div>
+            <div class="persona-pain-body">Rapid growth and cold automation are fraying internal culture, eroding trust, and dehumanizing their brand narrative. They are terrified of becoming what they set out to disrupt.</div>
+          </div>
+        </div>
+
+        <div class="persona">
+          <div class="persona-left">
+            <div class="persona-num">02</div>
+            <div class="persona-name">The Cross-Border Bridge Executive</div>
+            <div class="persona-target">Managing Directors, Chief Growth Officers, and regional leads steering corporate expansion across US-LATAM and Caribbean networks</div>
+          </div>
+          <div class="persona-center">
+            <div class="persona-friction-label">The Technical Friction</div>
+            <div class="persona-friction-head">Broken data governance across borders</div>
+            <div class="persona-friction-body">Scaling digital platforms and content pipelines across borders is throttled by poor data governance, fragmented tracking metrics, and a complete absence of clean Business Intelligence insights.</div>
+          </div>
+          <div class="persona-right">
+            <div class="persona-pain-label">The Human Pain</div>
+            <div class="persona-pain-head">Sterile translation instead of resonance</div>
+            <div class="persona-pain-body">Their cross-border messaging feels like a sterile translation rather than a culturally resonant invitation. They need a leader who speaks the three native languages of the market to anchor strategy in radical empathy.</div>
+          </div>
+        </div>
+
+        <div class="persona">
+          <div class="persona-left">
+            <div class="persona-num">03</div>
+            <div class="persona-name">The Multicultural Market Leader</div>
+            <div class="persona-target">COOs, Country Directors, and VP-level Digital Strategists at Global Non-Profits, Intergovernmental Organizations, and Cross-Border Foundations</div>
+          </div>
+          <div class="persona-center">
+            <div class="persona-friction-label">The Technical Friction</div>
+            <div class="persona-friction-head">Data locked in legacy patchwork</div>
+            <div class="persona-friction-body">Decades of rich, multilingual field data and donor metrics are locked in a chaotic patchwork of legacy software and disconnected spreadsheets — delaying execution and creating friction during critical grant renewals.</div>
+          </div>
+          <div class="persona-right">
+            <div class="persona-pain-label">The Human Pain</div>
+            <div class="persona-pain-head">Passion buried under bureaucracy</div>
+            <div class="persona-pain-body">There is a profound energetic disconnect between the passionate, mission-driven people in the field and the bureaucratic reporting required by global stakeholders. They need an orchestrator who treats a database as a living repository of human stories.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 3.5rem; text-align: center;">
+        <a class="btn" href="#" onclick="return show('contact')">See If We're a Fit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MEDIA ───────────────────────────────────────────── -->
+<section id="media">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">Media</div>
+      <h2 class="section-title">The Platform</h2>
+      <div class="divider"></div>
+      <p class="section-intro">
+        Sacred Algorithms is also a conversation — ongoing, public, and open to anyone asking the right questions about technology, humanity, and what it means to lead consciously in a digital world.
+      </p>
+
+      <div class="media-grid">
+
+        <div class="media-card">
+          <div class="media-type">Podcast</div>
+          <h3 class="media-title">Media Refugees</h3>
+          <p class="media-body">
+            A podcast co-hosted by Will Arredondo and Bobby — exploring the intersection of politics, spirituality, and culture in a rapidly shifting media landscape. Candid conversations for people who refuse to accept the default narrative.
+          </p>
+          <div class="media-meta">With Will Arredondo &amp; Bobby · New episodes ongoing</div>
+          <!-- Placeholder for podcast link -->
+          <div style="margin-top: 1.5rem;">
+            <a class="btn btn-ghost" href="#" style="font-size:0.68rem;">Listen Now ↗</a>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="media-type">Substack · Essays &amp; Insights</div>
+          <h3 class="media-title">Sacred Algorithms</h3>
+          <p class="media-body">
+            Will's ongoing essay practice — exploring transhumanism, conscious technology, ethical AI, and the spiritual dimensions of organizational life. For leaders who think deeply about where technology is taking us, and why it matters.
+          </p>
+          <div class="media-meta">Published on Substack · Subscribe for new essays</div>
+          <!-- Placeholder for Substack link -->
+          <div style="margin-top: 1.5rem;">
+            <a class="btn btn-ghost" href="#" style="font-size:0.68rem;">Read on Substack ↗</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Featured Essay Placeholder -->
+      <div style="margin-top: 3rem; padding: 2.5rem; border: 1px solid var(--border); background: var(--card-bg);">
+        <div class="section-label" style="margin-bottom: 0.75rem;">Latest Essay</div>
+        <h3 style="font-family: var(--font-d); font-size: 1.6rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; letter-spacing: -0.01em;">
+          Transhumanism and the Question of the Sacred
+        </h3>
+        <p style="font-size: 0.92rem; line-height: 1.85; max-width: 640px; margin-bottom: 1.5rem;">
+          What does it mean to enhance human capability when the definition of "human" is already in flux? Exploring where the transhumanist project diverges from — and sometimes converges with — the Sacred Algorithms framework.
+        </p>
+        <a class="btn btn-ghost" href="#" style="font-size:0.68rem;">Read the Essay ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-label">Begin the Conversation</div>
+      <h2 class="section-title">Work With Will</h2>
+      <div class="divider"></div>
+
+      <div class="contact-grid">
+        <div>
+          <p class="section-intro" style="margin-bottom: 2rem;">
+            Whether you're a scaling organization losing coherence, a cross-border enterprise struggling with cultural resonance, or a leader who simply knows something important is misaligned — this is where we start.
+          </p>
+          <div class="contact-intro">
+            <p>
+              Will works with a small number of clients at any time. Every engagement begins with a conversation — not a proposal. If the work aligns, we move forward together.
+            </p>
+            <p>
+              If you're interested in bringing a Sacred Algorithms chapter to your organization or community, note that in your message.
+            </p>
+          </div>
+          <div class="contact-ways">
+            <div class="contact-way">
+              <div class="contact-way-label">Email</div>
+              <div class="contact-way-value"><a href="mailto:will@sacred-algorithms.com">will@sacred-algorithms.com</a></div>
+            </div>
+            <div class="contact-way">
+              <div class="contact-way-label">Based in</div>
+              <div class="contact-way-value">United States · Available globally</div>
+            </div>
+            <div class="contact-way">
+              <div class="contact-way-label">Languages</div>
+              <div class="contact-way-value">English · Spanish · Portuguese</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div id="contact-form-wrap">
+            <form onsubmit="return handleSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" id="fname" name="fname" required>
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input type="text" id="lname" name="lname" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="org">Organization</label>
+                <input type="text" id="org" name="org" placeholder="Company, NGO, or Institution">
+              </div>
+              <div class="form-group">
+                <label for="interest">I'm interested in</label>
+                <select id="interest" name="interest">
+                  <option value="">— Select —</option>
+                  <option>Strategic consulting (The Sovereign Architecture™)</option>
+                  <option>Fractional CMO engagement</option>
+                  <option>Speaking or thought leadership</option>
+                  <option>Starting a Sacred Algorithms chapter</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Tell me about the challenge</label>
+                <textarea id="message" name="message" placeholder="What's broken? What's at stake? What have you already tried?"></textarea>
+              </div>
+              <button type="submit" class="btn" style="width:100%; justify-content: center;">Send Message</button>
+            </form>
+          </div>
+          <div class="form-success" id="form-success">
+            <h3>Message received.</h3>
+            <p>Will reads every inquiry personally. You'll hear back within two business days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <svg class="footer-metatron" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="0.6" aria-hidden="true">
+    <circle cx="250" cy="250" r="220"/>
+    <circle cx="250" cy="250" r="110"/>
+    <circle cx="250" cy="140" r="110"/>
+    <circle cx="250" cy="360" r="110"/>
+    <circle cx="345.4" cy="195" r="110"/>
+    <circle cx="154.6" cy="195" r="110"/>
+    <circle cx="345.4" cy="305" r="110"/>
+    <circle cx="154.6" cy="305" r="110"/>
+    <line x1="250" y1="30" x2="250" y2="470"/>
+    <line x1="57" y1="155" x2="443" y2="345"/>
+    <line x1="443" y1="155" x2="57" y2="345"/>
+    <polygon points="250,30 443,155 443,345 250,470 57,345 57,155"/>
+    <polygon points="250,140 345.4,195 345.4,305 250,360 154.6,305 154.6,195"/>
+  </svg>
+
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Sacred Algorithms</div>
+        <div class="footer-tagline">Where Soul Meets Strategy</div>
+        <p class="footer-mission">A global movement for leaders, organizations, and communities committed to technology that elevates humanity — not automates it away.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#" onclick="return show('movement')">The Movement</a></li>
+          <li><a href="#" onclick="return show('founder')">The Founder</a></li>
+          <li><a href="#" onclick="return show('work')">The Work</a></li>
+          <li><a href="#" onclick="return show('serve')">Who We Serve</a></li>
+          <li><a href="#" onclick="return show('media')">Media</a></li>
+          <li><a href="#" onclick="return show('contact')">Work With Will</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Substack</a></li>
+          <li><a href="#">Media Refugees Podcast</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+        <h4 style="margin-top: 2rem;">Domain</h4>
+        <ul>
+          <li><a href="https://sacred-algorithms.com" target="_blank">sacred-algorithms.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Sacred Algorithms · Founded by Will Arredondo · All rights reserved</div>
+      <div class="footer-copy">Technology in service of humanity.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── JS ─────────────────────────────────────────────── -->
+<script>
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) { target.classList.add('active'); }
+    const link = document.querySelector(`[data-section="${id}"]`);
+    if (link) { link.classList.add('active'); }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mobile-nav').classList.remove('open');
+    return false;
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return false;
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-nav').classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
