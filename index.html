@@ -338,6 +338,20 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
       align-items: start;
     }
+    .founder-photo-wrap {
+      margin-bottom: 2rem;
+    }
+    .founder-photo {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--border);
+      filter: grayscale(20%);
+      transition: filter .4s var(--ease);
+    }
+    .founder-photo:hover { filter: grayscale(0%); }
     .founder-body { font-size: 1rem; line-height: 1.9; }
     .founder-body p + p { margin-top: 1.1rem; }
     .founder-name {
@@ -1133,6 +1147,10 @@
         </div>
 
         <div>
+          <div class="founder-photo-wrap">
+            <img class="founder-photo" src="will-arredondo.webp" alt="Will Arredondo">
+          </div>
+
           <div style="padding: 2rem; border: 1px solid var(--border); background: var(--card-bg);">
             <div class="section-label" style="margin-bottom: 1rem;">The Positioning Statement</div>
             <p style="font-family: var(--font-d); font-size: 1.05rem; font-weight: 300; color: var(--white); line-height: 1.65; font-style: italic;">
