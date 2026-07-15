@@ -134,9 +134,9 @@
       background: linear-gradient(135deg, #020C1A 0%, var(--navy) 55%, #071830 100%);
     }
     .hero-metatron {
-      position: absolute; right: -2%; top: 50%;
+      position: absolute; right: 1%; top: 50%;
       transform: translateY(-50%);
-      width: min(680px, 65vw);
+      width: min(720px, 67vw);
       pointer-events: none; user-select: none;
       overflow: visible;
     }
@@ -765,13 +765,15 @@
         </radialGradient>
         <!-- Circuit trace gradient: purple → teal (left side) -->
         <linearGradient id="circL" x1="1" y1="0" x2="0" y2="0">
-          <stop offset="0%" stop-color="#8B70C0" stop-opacity="0.8"/>
-          <stop offset="100%" stop-color="#3DBFA8" stop-opacity="0.5"/>
+          <stop offset="0%" stop-color="#9B7FCC" stop-opacity="1.0"/>
+          <stop offset="70%" stop-color="#5EC8B8" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#3DBFA8" stop-opacity="0.6"/>
         </linearGradient>
         <!-- Circuit trace gradient: gold-purple → gold (right side) -->
         <linearGradient id="circR" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#B090D0" stop-opacity="0.8"/>
-          <stop offset="100%" stop-color="#C48D59" stop-opacity="0.5"/>
+          <stop offset="0%" stop-color="#B090D0" stop-opacity="1.0"/>
+          <stop offset="70%" stop-color="#D4A070" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#C48D59" stop-opacity="0.6"/>
         </linearGradient>
       </defs>
 
@@ -804,34 +806,38 @@
       <circle cx="309" cy="323" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
       <circle cx="309" cy="276" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
 
-      <!-- All connecting lines (full Metatron web) -->
-      <!-- Center to 6 inner nodes -->
-      <line x1="350" y1="300" x2="350" y2="205" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <line x1="350" y1="300" x2="432" y2="252" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <line x1="350" y1="300" x2="432" y2="347" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <line x1="350" y1="300" x2="350" y2="395" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <line x1="350" y1="300" x2="268" y2="347" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <line x1="350" y1="300" x2="268" y2="252" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.75"/>
-      <!-- All cross-connections between the 6 nodes -->
-      <line x1="350" y1="205" x2="432" y2="347" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="350" y1="205" x2="268" y2="347" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="350" y1="205" x2="350" y2="395" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="252" x2="268" y2="252" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="252" x2="268" y2="347" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="252" x2="350" y2="395" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="347" x2="268" y2="347" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="347" x2="268" y2="252" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="432" y1="347" x2="350" y2="205" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="350" y1="395" x2="268" y2="252" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="350" y1="395" x2="432" y2="252" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <line x1="268" y1="347" x2="432" y2="252" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.6"/>
-      <!-- Hexagon -->
-      <polygon points="350,205 432,252 432,347 350,395 268,347 268,252" stroke="url(#mgPurple)" stroke-width="0.8" opacity="0.85"/>
-      <!-- Star triangles -->
-      <polygon points="350,110 514,395 186,395" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.65"/>
-      <polygon points="350,490 514,205 186,205" stroke="url(#mgPurple)" stroke-width="0.55" opacity="0.65"/>
-      <!-- Outer hexagon -->
-      <polygon points="350,110 514,205 514,395 350,490 186,395 186,205" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.45"/>
+      <!-- ── GEOMETRIC LINES — Metatron's Cube web ──────────── -->
+      <!-- Center spokes (bright, glowing) -->
+      <g stroke="url(#mgPurple)" stroke-width="1.1" opacity="0.92" fill="none" filter="url(#lineGlow)">
+        <line x1="350" y1="300" x2="350" y2="205"/>
+        <line x1="350" y1="300" x2="432" y2="252"/>
+        <line x1="350" y1="300" x2="432" y2="347"/>
+        <line x1="350" y1="300" x2="350" y2="395"/>
+        <line x1="350" y1="300" x2="268" y2="347"/>
+        <line x1="350" y1="300" x2="268" y2="252"/>
+      </g>
+      <!-- Full geometric web — all cross-connections -->
+      <g stroke="url(#mgPurple)" stroke-width="0.8" opacity="0.78" fill="none" filter="url(#lineGlow)">
+        <line x1="350" y1="205" x2="432" y2="347"/>
+        <line x1="350" y1="205" x2="268" y2="347"/>
+        <line x1="350" y1="205" x2="350" y2="395"/>
+        <line x1="432" y1="252" x2="268" y2="252"/>
+        <line x1="432" y1="252" x2="268" y2="347"/>
+        <line x1="432" y1="252" x2="350" y2="395"/>
+        <line x1="432" y1="347" x2="268" y2="347"/>
+        <line x1="432" y1="347" x2="268" y2="252"/>
+        <line x1="432" y1="347" x2="350" y2="205"/>
+        <line x1="350" y1="395" x2="268" y2="252"/>
+        <line x1="350" y1="395" x2="432" y2="252"/>
+        <line x1="268" y1="347" x2="432" y2="252"/>
+      </g>
+      <!-- Inner hexagon (prominent outline) -->
+      <polygon points="350,205 432,252 432,347 350,395 268,347 268,252" stroke="url(#mgPurple)" stroke-width="1.5" opacity="1" fill="none" filter="url(#lineGlow)"/>
+      <!-- Star of David triangles (dominant — these define the sacred geometry) -->
+      <polygon points="350,110 514,395 186,395" stroke="url(#mgPurple)" stroke-width="1.2" opacity="0.88" fill="none" filter="url(#lineGlow)"/>
+      <polygon points="350,490 514,205 186,205" stroke="url(#mgPurple)" stroke-width="1.2" opacity="0.88" fill="none" filter="url(#lineGlow)"/>
+      <!-- Outer hexagon (subtle boundary) -->
+      <polygon points="350,110 514,205 514,395 350,490 186,395 186,205" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.55" fill="none"/>
 
       <!-- Glowing nodes -->
       <circle cx="350" cy="300" r="5" fill="#D0A8F8" filter="url(#nodeGlow)" opacity="1"/>
@@ -847,51 +853,115 @@
       <circle cx="186" cy="205" r="3" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.8"/>
       <circle cx="186" cy="395" r="3" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.8"/>
 
-      <!-- ── CIRCUIT TRACES — LEFT (from Metatron left edge ~255, extending to x=0) -->
-      <line x1="255" y1="300" x2="10" y2="300" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="218" y1="300" x2="218" y2="265" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="218" y1="265" x2="10" y2="265" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="175" y1="265" x2="175" y2="238" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="175" y1="238" x2="10" y2="238" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="218" y1="300" x2="218" y2="335" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="218" y1="335" x2="10" y2="335" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="155" y1="335" x2="155" y2="362" stroke="url(#circL)" stroke-width="0.8"/>
-      <line x1="155" y1="362" x2="10" y2="362" stroke="url(#circL)" stroke-width="0.8"/>
-      <!-- Junction dots left -->
-      <circle cx="218" cy="300" r="2.5" fill="#9B7FCC" opacity="0.9"/>
-      <circle cx="218" cy="265" r="2" fill="#9B7FCC" opacity="0.8"/>
-      <circle cx="175" cy="265" r="2" fill="#9B7FCC" opacity="0.7"/>
-      <circle cx="218" cy="335" r="2" fill="#9B7FCC" opacity="0.8"/>
-      <circle cx="155" cy="335" r="2" fill="#9B7FCC" opacity="0.7"/>
-      <!-- Endpoint circles left -->
-      <circle cx="30" cy="300" r="3" stroke="#3DBFA8" stroke-width="0.8" opacity="0.55"/>
-      <circle cx="50" cy="265" r="2.5" stroke="#3DBFA8" stroke-width="0.8" opacity="0.45"/>
-      <circle cx="70" cy="238" r="2" stroke="#3DBFA8" stroke-width="0.8" opacity="0.4"/>
-      <circle cx="30" cy="335" r="2.5" stroke="#3DBFA8" stroke-width="0.8" opacity="0.45"/>
-      <circle cx="50" cy="362" r="2" stroke="#3DBFA8" stroke-width="0.8" opacity="0.4"/>
+      <!-- ── CIRCUIT TRACES LEFT — PCB-style, purple→teal ─── -->
+      <g fill="none">
+        <g filter="url(#lineGlow)">
+          <!-- Top cluster: 7 runs fanning above center -->
+          <line x1="255" y1="205" x2="12" y2="205" stroke="url(#circL)" stroke-width="1.1"/>
+          <line x1="255" y1="218" x2="12" y2="218" stroke="url(#circL)" stroke-width="1.2"/>
+          <line x1="228" y1="218" x2="228" y2="230" stroke="url(#circL)" stroke-width="1.2"/>
+          <line x1="255" y1="230" x2="12" y2="230" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="194" y1="230" x2="194" y2="242" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="242" x2="12" y2="242" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="230" y1="242" x2="230" y2="252" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="255" y1="252" x2="12" y2="252" stroke="url(#circL)" stroke-width="1.8"/>
+          <line x1="255" y1="265" x2="12" y2="265" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="230" y1="265" x2="230" y2="278" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="278" x2="12" y2="278" stroke="url(#circL)" stroke-width="1.2"/>
+          <!-- Center main bus -->
+          <line x1="255" y1="300" x2="12" y2="300" stroke="url(#circL)" stroke-width="2.2"/>
+          <!-- Bottom cluster: 7 runs fanning below center -->
+          <line x1="255" y1="322" x2="12" y2="322" stroke="url(#circL)" stroke-width="1.2"/>
+          <line x1="255" y1="335" x2="12" y2="335" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="230" y1="335" x2="230" y2="347" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="255" y1="347" x2="12" y2="347" stroke="url(#circL)" stroke-width="1.8"/>
+          <line x1="194" y1="347" x2="194" y2="360" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="255" y1="360" x2="12" y2="360" stroke="url(#circL)" stroke-width="1.5"/>
+          <line x1="228" y1="360" x2="228" y2="373" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="373" x2="12" y2="373" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="386" x2="12" y2="386" stroke="url(#circL)" stroke-width="1.1"/>
+          <line x1="255" y1="398" x2="12" y2="398" stroke="url(#circL)" stroke-width="1.0"/>
+        </g>
+        <!-- Junction dots -->
+        <circle cx="230" cy="252" r="2.5" fill="#9B7FCC" opacity="0.9"/>
+        <circle cx="230" cy="300" r="3" fill="#9B7FCC" opacity="0.95"/>
+        <circle cx="230" cy="347" r="2.5" fill="#9B7FCC" opacity="0.9"/>
+        <circle cx="194" cy="230" r="2" fill="#9B7FCC" opacity="0.8"/>
+        <circle cx="194" cy="360" r="2" fill="#9B7FCC" opacity="0.8"/>
+        <circle cx="228" cy="218" r="1.8" fill="#9B7FCC" opacity="0.7"/>
+        <circle cx="228" cy="373" r="1.8" fill="#9B7FCC" opacity="0.7"/>
+        <!-- Endpoint terminals (teal, sized by importance) -->
+        <circle cx="25" cy="205" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.6"/>
+        <circle cx="25" cy="218" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="230" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.7"/>
+        <circle cx="25" cy="242" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="25" cy="252" r="3" stroke="#3DBFA8" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <circle cx="25" cy="265" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="25" cy="278" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="300" r="4" stroke="#3DBFA8" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="25" cy="322" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="335" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="25" cy="347" r="3" stroke="#3DBFA8" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <circle cx="25" cy="360" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="25" cy="373" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.7"/>
+        <circle cx="25" cy="386" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="398" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.6"/>
+      </g>
 
-      <!-- ── CIRCUIT TRACES — RIGHT (from Metatron right edge ~445, extending to x=700) -->
-      <line x1="445" y1="300" x2="690" y2="300" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="480" y1="300" x2="480" y2="265" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="480" y1="265" x2="690" y2="265" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="522" y1="265" x2="522" y2="238" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="522" y1="238" x2="690" y2="238" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="480" y1="300" x2="480" y2="335" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="480" y1="335" x2="690" y2="335" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="544" y1="335" x2="544" y2="362" stroke="url(#circR)" stroke-width="0.8"/>
-      <line x1="544" y1="362" x2="690" y2="362" stroke="url(#circR)" stroke-width="0.8"/>
-      <!-- Junction dots right -->
-      <circle cx="480" cy="300" r="2.5" fill="#C48D59" opacity="0.9"/>
-      <circle cx="480" cy="265" r="2" fill="#C48D59" opacity="0.8"/>
-      <circle cx="522" cy="265" r="2" fill="#C48D59" opacity="0.7"/>
-      <circle cx="480" cy="335" r="2" fill="#C48D59" opacity="0.8"/>
-      <circle cx="544" cy="335" r="2" fill="#C48D59" opacity="0.7"/>
-      <!-- Endpoint circles right -->
-      <circle cx="670" cy="300" r="3" stroke="#C48D59" stroke-width="0.8" opacity="0.55"/>
-      <circle cx="650" cy="265" r="2.5" stroke="#C48D59" stroke-width="0.8" opacity="0.45"/>
-      <circle cx="630" cy="238" r="2" stroke="#C48D59" stroke-width="0.8" opacity="0.4"/>
-      <circle cx="670" cy="335" r="2.5" stroke="#C48D59" stroke-width="0.8" opacity="0.45"/>
-      <circle cx="650" cy="362" r="2" stroke="#C48D59" stroke-width="0.8" opacity="0.4"/>
+      <!-- ── CIRCUIT TRACES RIGHT — PCB-style, purple→gold ── -->
+      <g fill="none">
+        <g filter="url(#lineGlow)">
+          <!-- Top cluster -->
+          <line x1="445" y1="205" x2="688" y2="205" stroke="url(#circR)" stroke-width="1.1"/>
+          <line x1="445" y1="218" x2="688" y2="218" stroke="url(#circR)" stroke-width="1.2"/>
+          <line x1="472" y1="218" x2="472" y2="230" stroke="url(#circR)" stroke-width="1.2"/>
+          <line x1="445" y1="230" x2="688" y2="230" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="506" y1="230" x2="506" y2="242" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="242" x2="688" y2="242" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="470" y1="242" x2="470" y2="252" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="445" y1="252" x2="688" y2="252" stroke="url(#circR)" stroke-width="1.8"/>
+          <line x1="445" y1="265" x2="688" y2="265" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="470" y1="265" x2="470" y2="278" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="278" x2="688" y2="278" stroke="url(#circR)" stroke-width="1.2"/>
+          <!-- Center main bus -->
+          <line x1="445" y1="300" x2="688" y2="300" stroke="url(#circR)" stroke-width="2.2"/>
+          <!-- Bottom cluster -->
+          <line x1="445" y1="322" x2="688" y2="322" stroke="url(#circR)" stroke-width="1.2"/>
+          <line x1="445" y1="335" x2="688" y2="335" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="470" y1="335" x2="470" y2="347" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="445" y1="347" x2="688" y2="347" stroke="url(#circR)" stroke-width="1.8"/>
+          <line x1="506" y1="347" x2="506" y2="360" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="445" y1="360" x2="688" y2="360" stroke="url(#circR)" stroke-width="1.5"/>
+          <line x1="472" y1="360" x2="472" y2="373" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="373" x2="688" y2="373" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="386" x2="688" y2="386" stroke="url(#circR)" stroke-width="1.1"/>
+          <line x1="445" y1="398" x2="688" y2="398" stroke="url(#circR)" stroke-width="1.0"/>
+        </g>
+        <!-- Junction dots -->
+        <circle cx="470" cy="252" r="2.5" fill="#C48D59" opacity="0.9"/>
+        <circle cx="470" cy="300" r="3" fill="#C48D59" opacity="0.95"/>
+        <circle cx="470" cy="347" r="2.5" fill="#C48D59" opacity="0.9"/>
+        <circle cx="506" cy="230" r="2" fill="#C48D59" opacity="0.8"/>
+        <circle cx="506" cy="360" r="2" fill="#C48D59" opacity="0.8"/>
+        <circle cx="472" cy="218" r="1.8" fill="#C48D59" opacity="0.7"/>
+        <circle cx="472" cy="373" r="1.8" fill="#C48D59" opacity="0.7"/>
+        <!-- Endpoint terminals (gold) -->
+        <circle cx="675" cy="205" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.6"/>
+        <circle cx="675" cy="218" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="230" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.7"/>
+        <circle cx="675" cy="242" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="675" cy="252" r="3" stroke="#C48D59" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <circle cx="675" cy="265" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="675" cy="278" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="300" r="4" stroke="#C48D59" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="675" cy="322" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="335" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="675" cy="347" r="3" stroke="#C48D59" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <circle cx="675" cy="360" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
+        <circle cx="675" cy="373" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.7"/>
+        <circle cx="675" cy="386" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="398" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.6"/>
+      </g>
     </svg>
 
     <div class="container">
