@@ -718,7 +718,7 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .form-row { grid-template-columns: 1fr; }
       .stage { grid-template-columns: 3.5rem 1fr; }
-      .hero-metatron { opacity: 0.15; }
+      .hero-metatron { display: none; }
     }
   </style>
 </head>
@@ -783,46 +783,77 @@
           <stop offset="70%" stop-color="#5EC8B8" stop-opacity="0.85"/>
           <stop offset="100%" stop-color="#3DBFA8" stop-opacity="0.6"/>
         </linearGradient>
-        <!-- Circuit trace gradient: gold-purple → gold (right side) -->
+        <!-- Circuit trace gradient: purple → gold (right side) -->
         <linearGradient id="circR" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#B090D0" stop-opacity="1.0"/>
           <stop offset="70%" stop-color="#D4A070" stop-opacity="0.85"/>
           <stop offset="100%" stop-color="#C48D59" stop-opacity="0.6"/>
         </linearGradient>
+        <!-- Circuit trace gradient: purple → teal (top, going up) -->
+        <linearGradient id="circT" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#9B7FCC" stop-opacity="1.0"/>
+          <stop offset="70%" stop-color="#5EC8B8" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#3DBFA8" stop-opacity="0.5"/>
+        </linearGradient>
+        <!-- Circuit trace gradient: purple → gold (bottom, going down) -->
+        <linearGradient id="circB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#B090D0" stop-opacity="1.0"/>
+          <stop offset="70%" stop-color="#D4A070" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#C48D59" stop-opacity="0.5"/>
+        </linearGradient>
+        <!-- Crystal inner fill for hexagon -->
+        <radialGradient id="crystalFill" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C8A8F0" stop-opacity="0.18"/>
+          <stop offset="55%" stop-color="#9B7FCC" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Triangle fill — pointing up -->
+        <linearGradient id="triFillUp" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#C8A8F0" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.03"/>
+        </linearGradient>
+        <!-- Triangle fill — pointing down -->
+        <linearGradient id="triFillDown" x1="0.5" y1="1" x2="0.5" y2="0">
+          <stop offset="0%" stop-color="#C48D59" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.03"/>
+        </linearGradient>
       </defs>
 
       <!-- ── METATRON CENTER: (350, 300), R=95 ────────────── -->
 
-      <!-- Outer 6 circles (at 2R from center) — faint -->
-      <circle cx="350" cy="110" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
-      <circle cx="432" cy="157" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>  <!-- actually 350+82.3=432 and 300-47.5=252... let me fix these -->
-      <circle cx="514" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
-      <circle cx="514" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
-      <circle cx="350" cy="490" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
-      <circle cx="186" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
-      <circle cx="186" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.35"/>
+      <!-- Circles: very faint — just ghost hints of the sacred geometry -->
+      <!-- Outer 6 circles -->
+      <circle cx="350" cy="110" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <circle cx="514" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <circle cx="514" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <circle cx="350" cy="490" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <circle cx="186" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <circle cx="186" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.1"/>
+      <!-- Inner 7 circles -->
+      <circle cx="350" cy="300" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="350" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="432" cy="252" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="432" cy="347" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="350" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="268" cy="347" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <circle cx="268" cy="252" r="95" stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.14"/>
+      <!-- Small inner circles — barely perceptible -->
+      <circle cx="350" cy="300" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="350" cy="253" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="391" cy="276" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="391" cy="323" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="350" cy="347" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="309" cy="323" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
+      <circle cx="309" cy="276" r="47" stroke="url(#mgPurple)" stroke-width="0.35" opacity="0.09"/>
 
-      <!-- Inner 7 circles (the core Metatron ring) -->
-      <circle cx="350" cy="300" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8" filter="url(#lineGlow)"/>
-      <circle cx="350" cy="205" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
-      <circle cx="432" cy="252" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
-      <circle cx="432" cy="347" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
-      <circle cx="350" cy="395" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
-      <circle cx="268" cy="347" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
-      <circle cx="268" cy="252" r="95" stroke="url(#mgPurple)" stroke-width="0.7" opacity="0.8"/>
+      <!-- Crystal face fills: subtle glow inside the star geometry -->
+      <polygon points="350,110 514,395 186,395" fill="url(#triFillUp)" opacity="1"/>
+      <polygon points="350,490 514,205 186,205" fill="url(#triFillDown)" opacity="1"/>
+      <polygon points="350,205 432,252 432,347 350,395 268,347 268,252" fill="url(#crystalFill)" opacity="1"/>
 
-      <!-- Flower of Life (small inner circles, r=47.5) -->
-      <circle cx="350" cy="300" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="350" cy="253" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="391" cy="276" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="391" cy="323" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="350" cy="347" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="309" cy="323" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="309" cy="276" r="47" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.6"/>
-
-      <!-- ── GEOMETRIC LINES — Metatron's Cube web ──────────── -->
+      <!-- ── GEOMETRIC LINES — Metatron's Cube angular web ──────────── -->
       <!-- Center spokes (bright, glowing) -->
-      <g stroke="url(#mgPurple)" stroke-width="1.1" opacity="0.92" fill="none" filter="url(#lineGlow)">
+      <g stroke="url(#mgPurple)" stroke-width="1.6" opacity="0.98" fill="none" filter="url(#lineGlow)">
         <line x1="350" y1="300" x2="350" y2="205"/>
         <line x1="350" y1="300" x2="432" y2="252"/>
         <line x1="350" y1="300" x2="432" y2="347"/>
@@ -831,7 +862,7 @@
         <line x1="350" y1="300" x2="268" y2="252"/>
       </g>
       <!-- Full geometric web — all cross-connections -->
-      <g stroke="url(#mgPurple)" stroke-width="0.8" opacity="0.78" fill="none" filter="url(#lineGlow)">
+      <g stroke="url(#mgPurple)" stroke-width="1.1" opacity="0.88" fill="none" filter="url(#lineGlow)">
         <line x1="350" y1="205" x2="432" y2="347"/>
         <line x1="350" y1="205" x2="268" y2="347"/>
         <line x1="350" y1="205" x2="350" y2="395"/>
@@ -845,137 +876,154 @@
         <line x1="350" y1="395" x2="432" y2="252"/>
         <line x1="268" y1="347" x2="432" y2="252"/>
       </g>
-      <!-- Inner hexagon (prominent outline) -->
-      <polygon points="350,205 432,252 432,347 350,395 268,347 268,252" stroke="url(#mgPurple)" stroke-width="1.5" opacity="1" fill="none" filter="url(#lineGlow)"/>
-      <!-- Star of David triangles (dominant — these define the sacred geometry) -->
-      <polygon points="350,110 514,395 186,395" stroke="url(#mgPurple)" stroke-width="1.2" opacity="0.88" fill="none" filter="url(#lineGlow)"/>
-      <polygon points="350,490 514,205 186,205" stroke="url(#mgPurple)" stroke-width="1.2" opacity="0.88" fill="none" filter="url(#lineGlow)"/>
-      <!-- Outer hexagon (subtle boundary) -->
-      <polygon points="350,110 514,205 514,395 350,490 186,395 186,205" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.55" fill="none"/>
+      <!-- Inner hexagon (prominent glowing outline) -->
+      <polygon points="350,205 432,252 432,347 350,395 268,347 268,252" stroke="url(#mgPurple)" stroke-width="2.5" opacity="1" fill="none" filter="url(#lineGlow)"/>
+      <!-- Star of David triangles (dominant — the angular shield) -->
+      <polygon points="350,110 514,395 186,395" stroke="url(#mgPurple)" stroke-width="2.2" opacity="0.95" fill="none" filter="url(#lineGlow)"/>
+      <polygon points="350,490 514,205 186,205" stroke="url(#mgPurple)" stroke-width="2.2" opacity="0.95" fill="none" filter="url(#lineGlow)"/>
+      <!-- Outer hexagon boundary -->
+      <polygon points="350,110 514,205 514,395 350,490 186,395 186,205" stroke="url(#mgPurple)" stroke-width="1.0" opacity="0.65" fill="none" filter="url(#lineGlow)"/>
 
       <!-- Glowing nodes -->
-      <circle cx="350" cy="300" r="5" fill="#D0A8F8" filter="url(#nodeGlow)" opacity="1"/>
-      <circle cx="350" cy="205" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <circle cx="432" cy="252" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <circle cx="432" cy="347" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <circle cx="350" cy="395" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <circle cx="268" cy="347" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <circle cx="268" cy="252" r="3.5" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
-      <!-- Outer corner nodes -->
-      <circle cx="514" cy="205" r="3" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.8"/>
-      <circle cx="514" cy="395" r="3" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.8"/>
-      <circle cx="186" cy="205" r="3" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.8"/>
-      <circle cx="186" cy="395" r="3" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.8"/>
+      <circle cx="350" cy="300" r="5.5" fill="#D0A8F8" filter="url(#nodeGlow)" opacity="1"/>
+      <circle cx="350" cy="205" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="432" cy="252" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="432" cy="347" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="350" cy="395" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="268" cy="347" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="268" cy="252" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.95"/>
+      <!-- Outer star-point nodes — brighter, all 6 -->
+      <circle cx="350" cy="110" r="4.5" fill="#C8A8F0" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="514" cy="205" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.92"/>
+      <circle cx="514" cy="395" r="4" fill="#C48D59" filter="url(#nodeGlow)" opacity="0.92"/>
+      <circle cx="350" cy="490" r="4.5" fill="#C8A8F0" filter="url(#nodeGlow)" opacity="0.95"/>
+      <circle cx="186" cy="395" r="4" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.92"/>
+      <circle cx="186" cy="205" r="4" fill="#9B7FCC" filter="url(#nodeGlow)" opacity="0.92"/>
 
       <!-- ── CIRCUIT TRACES LEFT — PCB-style, purple→teal ─── -->
       <g fill="none">
         <g filter="url(#lineGlow)">
-          <!-- Top cluster: 7 runs fanning above center -->
-          <line x1="255" y1="205" x2="12" y2="205" stroke="url(#circL)" stroke-width="1.1"/>
-          <line x1="255" y1="218" x2="12" y2="218" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="228" y1="218" x2="228" y2="230" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="255" y1="230" x2="12" y2="230" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="194" y1="230" x2="194" y2="242" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="255" y1="242" x2="12" y2="242" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="230" y1="242" x2="230" y2="252" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="255" y1="252" x2="12" y2="252" stroke="url(#circL)" stroke-width="1.8"/>
-          <line x1="255" y1="265" x2="12" y2="265" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="230" y1="265" x2="230" y2="278" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="255" y1="278" x2="12" y2="278" stroke="url(#circL)" stroke-width="1.2"/>
+          <!-- Cluster from upper-left hex node (268, 252) -->
+          <line x1="255" y1="235" x2="12" y2="235" stroke="url(#circL)" stroke-width="1.0"/>
+          <line x1="255" y1="244" x2="12" y2="244" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="228" y1="244" x2="228" y2="252" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="252" x2="12" y2="252" stroke="url(#circL)" stroke-width="2.2"/>
+          <line x1="255" y1="261" x2="12" y2="261" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="204" y1="261" x2="204" y2="270" stroke="url(#circL)" stroke-width="1.2"/>
+          <line x1="255" y1="270" x2="12" y2="270" stroke="url(#circL)" stroke-width="1.0"/>
           <!-- Center main bus -->
-          <line x1="255" y1="300" x2="12" y2="300" stroke="url(#circL)" stroke-width="2.2"/>
-          <!-- Bottom cluster: 7 runs fanning below center -->
-          <line x1="255" y1="322" x2="12" y2="322" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="255" y1="335" x2="12" y2="335" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="230" y1="335" x2="230" y2="347" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="255" y1="347" x2="12" y2="347" stroke="url(#circL)" stroke-width="1.8"/>
-          <line x1="194" y1="347" x2="194" y2="360" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="255" y1="360" x2="12" y2="360" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="228" y1="360" x2="228" y2="373" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="255" y1="373" x2="12" y2="373" stroke="url(#circL)" stroke-width="1.3"/>
-          <line x1="255" y1="386" x2="12" y2="386" stroke="url(#circL)" stroke-width="1.1"/>
-          <line x1="255" y1="398" x2="12" y2="398" stroke="url(#circL)" stroke-width="1.0"/>
+          <line x1="255" y1="300" x2="12" y2="300" stroke="url(#circL)" stroke-width="2.8"/>
+          <!-- Cluster from lower-left hex node (268, 347) -->
+          <line x1="255" y1="330" x2="12" y2="330" stroke="url(#circL)" stroke-width="1.0"/>
+          <line x1="255" y1="339" x2="12" y2="339" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="204" y1="339" x2="204" y2="347" stroke="url(#circL)" stroke-width="1.2"/>
+          <line x1="255" y1="347" x2="12" y2="347" stroke="url(#circL)" stroke-width="2.2"/>
+          <line x1="255" y1="356" x2="12" y2="356" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="228" y1="356" x2="228" y2="365" stroke="url(#circL)" stroke-width="1.3"/>
+          <line x1="255" y1="365" x2="12" y2="365" stroke="url(#circL)" stroke-width="1.0"/>
         </g>
         <!-- Junction dots -->
-        <circle cx="230" cy="252" r="2.5" fill="#9B7FCC" opacity="0.9"/>
-        <circle cx="230" cy="300" r="3" fill="#9B7FCC" opacity="0.95"/>
-        <circle cx="230" cy="347" r="2.5" fill="#9B7FCC" opacity="0.9"/>
-        <circle cx="194" cy="230" r="2" fill="#9B7FCC" opacity="0.8"/>
-        <circle cx="194" cy="360" r="2" fill="#9B7FCC" opacity="0.8"/>
-        <circle cx="228" cy="218" r="1.8" fill="#9B7FCC" opacity="0.7"/>
-        <circle cx="228" cy="373" r="1.8" fill="#9B7FCC" opacity="0.7"/>
-        <!-- Endpoint terminals (teal, sized by importance) -->
-        <circle cx="25" cy="205" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.6"/>
-        <circle cx="25" cy="218" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="25" cy="230" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.7"/>
-        <circle cx="25" cy="242" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="25" cy="252" r="3" stroke="#3DBFA8" stroke-width="1.5" fill="none" opacity="0.85"/>
-        <circle cx="25" cy="265" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="25" cy="278" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="25" cy="300" r="4" stroke="#3DBFA8" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
-        <circle cx="25" cy="322" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="25" cy="335" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="25" cy="347" r="3" stroke="#3DBFA8" stroke-width="1.5" fill="none" opacity="0.85"/>
-        <circle cx="25" cy="360" r="2.5" stroke="#3DBFA8" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="25" cy="373" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.7"/>
-        <circle cx="25" cy="386" r="2" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="25" cy="398" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.6"/>
+        <circle cx="228" cy="252" r="3" fill="#9B7FCC" opacity="0.95"/>
+        <circle cx="228" cy="300" r="3.5" fill="#9B7FCC" opacity="0.95"/>
+        <circle cx="228" cy="347" r="3" fill="#9B7FCC" opacity="0.95"/>
+        <circle cx="204" cy="261" r="2.2" fill="#9B7FCC" opacity="0.85"/>
+        <circle cx="204" cy="339" r="2.2" fill="#9B7FCC" opacity="0.85"/>
+        <!-- Endpoint terminals (teal) -->
+        <circle cx="25" cy="235" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="244" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="25" cy="252" r="3.8" stroke="#3DBFA8" stroke-width="1.6" fill="none" opacity="0.92"/>
+        <circle cx="25" cy="261" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="25" cy="270" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="300" r="5" stroke="#3DBFA8" stroke-width="2.0" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="25" cy="330" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="25" cy="339" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="25" cy="347" r="3.8" stroke="#3DBFA8" stroke-width="1.6" fill="none" opacity="0.92"/>
+        <circle cx="25" cy="356" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="25" cy="365" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
       </g>
 
       <!-- ── CIRCUIT TRACES RIGHT — PCB-style, purple→gold ── -->
       <g fill="none">
         <g filter="url(#lineGlow)">
-          <!-- Top cluster -->
-          <line x1="445" y1="205" x2="688" y2="205" stroke="url(#circR)" stroke-width="1.1"/>
-          <line x1="445" y1="218" x2="688" y2="218" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="472" y1="218" x2="472" y2="230" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="445" y1="230" x2="688" y2="230" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="506" y1="230" x2="506" y2="242" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="445" y1="242" x2="688" y2="242" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="470" y1="242" x2="470" y2="252" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="445" y1="252" x2="688" y2="252" stroke="url(#circR)" stroke-width="1.8"/>
-          <line x1="445" y1="265" x2="688" y2="265" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="470" y1="265" x2="470" y2="278" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="445" y1="278" x2="688" y2="278" stroke="url(#circR)" stroke-width="1.2"/>
+          <!-- Cluster from upper-right hex node (432, 252) -->
+          <line x1="445" y1="235" x2="688" y2="235" stroke="url(#circR)" stroke-width="1.0"/>
+          <line x1="445" y1="244" x2="688" y2="244" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="472" y1="244" x2="472" y2="252" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="252" x2="688" y2="252" stroke="url(#circR)" stroke-width="2.2"/>
+          <line x1="445" y1="261" x2="688" y2="261" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="496" y1="261" x2="496" y2="270" stroke="url(#circR)" stroke-width="1.2"/>
+          <line x1="445" y1="270" x2="688" y2="270" stroke="url(#circR)" stroke-width="1.0"/>
           <!-- Center main bus -->
-          <line x1="445" y1="300" x2="688" y2="300" stroke="url(#circR)" stroke-width="2.2"/>
-          <!-- Bottom cluster -->
-          <line x1="445" y1="322" x2="688" y2="322" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="445" y1="335" x2="688" y2="335" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="470" y1="335" x2="470" y2="347" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="445" y1="347" x2="688" y2="347" stroke="url(#circR)" stroke-width="1.8"/>
-          <line x1="506" y1="347" x2="506" y2="360" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="445" y1="360" x2="688" y2="360" stroke="url(#circR)" stroke-width="1.5"/>
-          <line x1="472" y1="360" x2="472" y2="373" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="445" y1="373" x2="688" y2="373" stroke="url(#circR)" stroke-width="1.3"/>
-          <line x1="445" y1="386" x2="688" y2="386" stroke="url(#circR)" stroke-width="1.1"/>
-          <line x1="445" y1="398" x2="688" y2="398" stroke="url(#circR)" stroke-width="1.0"/>
+          <line x1="445" y1="300" x2="688" y2="300" stroke="url(#circR)" stroke-width="2.8"/>
+          <!-- Cluster from lower-right hex node (432, 347) -->
+          <line x1="445" y1="330" x2="688" y2="330" stroke="url(#circR)" stroke-width="1.0"/>
+          <line x1="445" y1="339" x2="688" y2="339" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="496" y1="339" x2="496" y2="347" stroke="url(#circR)" stroke-width="1.2"/>
+          <line x1="445" y1="347" x2="688" y2="347" stroke="url(#circR)" stroke-width="2.2"/>
+          <line x1="445" y1="356" x2="688" y2="356" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="472" y1="356" x2="472" y2="365" stroke="url(#circR)" stroke-width="1.3"/>
+          <line x1="445" y1="365" x2="688" y2="365" stroke="url(#circR)" stroke-width="1.0"/>
         </g>
         <!-- Junction dots -->
-        <circle cx="470" cy="252" r="2.5" fill="#C48D59" opacity="0.9"/>
-        <circle cx="470" cy="300" r="3" fill="#C48D59" opacity="0.95"/>
-        <circle cx="470" cy="347" r="2.5" fill="#C48D59" opacity="0.9"/>
-        <circle cx="506" cy="230" r="2" fill="#C48D59" opacity="0.8"/>
-        <circle cx="506" cy="360" r="2" fill="#C48D59" opacity="0.8"/>
-        <circle cx="472" cy="218" r="1.8" fill="#C48D59" opacity="0.7"/>
-        <circle cx="472" cy="373" r="1.8" fill="#C48D59" opacity="0.7"/>
+        <circle cx="472" cy="252" r="3" fill="#C48D59" opacity="0.95"/>
+        <circle cx="472" cy="300" r="3.5" fill="#C48D59" opacity="0.95"/>
+        <circle cx="472" cy="347" r="3" fill="#C48D59" opacity="0.95"/>
+        <circle cx="496" cy="261" r="2.2" fill="#C48D59" opacity="0.85"/>
+        <circle cx="496" cy="339" r="2.2" fill="#C48D59" opacity="0.85"/>
         <!-- Endpoint terminals (gold) -->
-        <circle cx="675" cy="205" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.6"/>
-        <circle cx="675" cy="218" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="675" cy="230" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.7"/>
-        <circle cx="675" cy="242" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="675" cy="252" r="3" stroke="#C48D59" stroke-width="1.5" fill="none" opacity="0.85"/>
-        <circle cx="675" cy="265" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="675" cy="278" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="675" cy="300" r="4" stroke="#C48D59" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
-        <circle cx="675" cy="322" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="675" cy="335" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="675" cy="347" r="3" stroke="#C48D59" stroke-width="1.5" fill="none" opacity="0.85"/>
-        <circle cx="675" cy="360" r="2.5" stroke="#C48D59" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="675" cy="373" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.7"/>
-        <circle cx="675" cy="386" r="2" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
-        <circle cx="675" cy="398" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.6"/>
+        <circle cx="675" cy="235" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="244" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="675" cy="252" r="3.8" stroke="#C48D59" stroke-width="1.6" fill="none" opacity="0.92"/>
+        <circle cx="675" cy="261" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="675" cy="270" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="300" r="5" stroke="#C48D59" stroke-width="2.0" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="675" cy="330" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="675" cy="339" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="675" cy="347" r="3.8" stroke="#C48D59" stroke-width="1.6" fill="none" opacity="0.92"/>
+        <circle cx="675" cy="356" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.78"/>
+        <circle cx="675" cy="365" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
       </g>
+
+      <!-- ── CIRCUIT TRACES TOP — from top star point (350, 110), going up ── -->
+      <g fill="none">
+        <g filter="url(#lineGlow)">
+          <line x1="331" y1="97" x2="331" y2="0" stroke="url(#circT)" stroke-width="1.0"/>
+          <line x1="341" y1="97" x2="341" y2="0" stroke="url(#circT)" stroke-width="1.3"/>
+          <line x1="341" y1="58" x2="329" y2="58" stroke="url(#circT)" stroke-width="1.2"/>
+          <line x1="350" y1="97" x2="350" y2="0" stroke="url(#circT)" stroke-width="2.4"/>
+          <line x1="359" y1="97" x2="359" y2="0" stroke="url(#circT)" stroke-width="1.3"/>
+          <line x1="359" y1="38" x2="371" y2="38" stroke="url(#circT)" stroke-width="1.2"/>
+          <line x1="369" y1="97" x2="369" y2="0" stroke="url(#circT)" stroke-width="1.0"/>
+        </g>
+        <circle cx="341" cy="58" r="2.2" fill="#9B7FCC" opacity="0.88"/>
+        <circle cx="359" cy="38" r="2.2" fill="#9B7FCC" opacity="0.88"/>
+        <circle cx="331" cy="8" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="341" cy="8" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.82"/>
+        <circle cx="350" cy="8" r="4.2" stroke="#3DBFA8" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="359" cy="8" r="2.5" stroke="#3DBFA8" stroke-width="1.3" fill="none" opacity="0.82"/>
+        <circle cx="369" cy="8" r="1.8" stroke="#3DBFA8" stroke-width="1.0" fill="none" opacity="0.65"/>
+      </g>
+
+      <!-- ── CIRCUIT TRACES BOTTOM — from bottom star point (350, 490), going down ── -->
+      <g fill="none">
+        <g filter="url(#lineGlow)">
+          <line x1="331" y1="503" x2="331" y2="600" stroke="url(#circB)" stroke-width="1.0"/>
+          <line x1="341" y1="503" x2="341" y2="600" stroke="url(#circB)" stroke-width="1.3"/>
+          <line x1="341" y1="542" x2="329" y2="542" stroke="url(#circB)" stroke-width="1.2"/>
+          <line x1="350" y1="503" x2="350" y2="600" stroke="url(#circB)" stroke-width="2.4"/>
+          <line x1="359" y1="503" x2="359" y2="600" stroke="url(#circB)" stroke-width="1.3"/>
+          <line x1="359" y1="562" x2="371" y2="562" stroke="url(#circB)" stroke-width="1.2"/>
+          <line x1="369" y1="503" x2="369" y2="600" stroke="url(#circB)" stroke-width="1.0"/>
+        </g>
+        <circle cx="341" cy="542" r="2.2" fill="#C48D59" opacity="0.88"/>
+        <circle cx="359" cy="562" r="2.2" fill="#C48D59" opacity="0.88"/>
+        <circle cx="331" cy="592" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+        <circle cx="341" cy="592" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.82"/>
+        <circle cx="350" cy="592" r="4.2" stroke="#C48D59" stroke-width="1.8" fill="none" opacity="0.95" filter="url(#nodeGlow)"/>
+        <circle cx="359" cy="592" r="2.5" stroke="#C48D59" stroke-width="1.3" fill="none" opacity="0.82"/>
+        <circle cx="369" cy="592" r="1.8" stroke="#C48D59" stroke-width="1.0" fill="none" opacity="0.65"/>
+      </g>
+
     </svg>
 
     <div class="container">
@@ -1375,18 +1423,6 @@
       <div class="media-grid">
 
         <div class="media-card">
-          <div class="media-type">Podcast</div>
-          <h3 class="media-title">Media Refugees</h3>
-          <p class="media-body">
-            A podcast co-hosted by Will Arredondo and Bobby — exploring the intersection of politics, spirituality, and culture in a rapidly shifting media landscape. Candid conversations for people who refuse to accept the default narrative.
-          </p>
-          <div class="media-meta">With Will Arredondo &amp; Bobby · New episodes ongoing</div>
-          <div style="margin-top: 1.5rem;">
-            <a class="btn btn-ghost" href="https://mediarefugees.substack.com/" target="_blank" rel="noopener" style="font-size:0.68rem;">Listen Now ↗</a>
-          </div>
-        </div>
-
-        <div class="media-card">
           <div class="media-type">Substack · Essays &amp; Insights</div>
           <h3 class="media-title">Sacred Algorithms</h3>
           <p class="media-body">
@@ -1395,6 +1431,18 @@
           <div class="media-meta">Published on Substack · Subscribe for new essays</div>
           <div style="margin-top: 1.5rem;">
             <a class="btn btn-ghost" href="https://substack.com/@willarredondo" target="_blank" rel="noopener" style="font-size:0.68rem;">Read on Substack ↗</a>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="media-type">Podcast</div>
+          <h3 class="media-title">Media Refugees</h3>
+          <p class="media-body">
+            A podcast co-hosted by Will Arredondo and Bobby Lopez — exploring the intersection of politics, spirituality, and culture in a rapidly shifting media landscape. Candid conversations for people who refuse to accept the default narrative.
+          </p>
+          <div class="media-meta">With Will Arredondo &amp; Bobby Lopez · New episodes ongoing</div>
+          <div style="margin-top: 1.5rem;">
+            <a class="btn btn-ghost" href="https://mediarefugees.substack.com/" target="_blank" rel="noopener" style="font-size:0.68rem;">Listen Now ↗</a>
           </div>
         </div>
 
