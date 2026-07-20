@@ -139,7 +139,7 @@
       pointer-events: none; user-select: none;
       overflow: hidden;
     }
-    .hero-content { position: relative; z-index: 2; padding: 8rem 0 6rem; }
+    .hero-content { position: relative; z-index: 2; padding: 8rem 0 6rem; max-width: 52%; }
     .hero-label {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -787,17 +787,17 @@
           <stop offset="40%" stop-color="#9B7FCC" stop-opacity="0.88"/>
           <stop offset="100%" stop-color="#C48D59" stop-opacity="0.72"/>
         </radialGradient>
-        <!-- Left circuit: teal at edge → purple toward center -->
-        <linearGradient id="circL" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#0ED8C0" stop-opacity="0.85"/>
-          <stop offset="65%" stop-color="#30C0B0" stop-opacity="0.92"/>
+        <!-- Left circuit: teal → purple, absolute coords so gradient is consistent across all paths -->
+        <linearGradient id="circL" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="873" y2="0">
+          <stop offset="0%"   stop-color="#0ED8C0" stop-opacity="0.88"/>
+          <stop offset="65%"  stop-color="#30C0B0" stop-opacity="0.94"/>
           <stop offset="100%" stop-color="#9B7FCC" stop-opacity="1.0"/>
         </linearGradient>
-        <!-- Right circuit: purple at center → gold at edge -->
-        <linearGradient id="circR" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#B090D8" stop-opacity="1.0"/>
-          <stop offset="35%" stop-color="#C8A050" stop-opacity="0.92"/>
-          <stop offset="100%" stop-color="#E8C040" stop-opacity="0.82"/>
+        <!-- Right circuit: purple → gold, absolute coords from hex vertex to right edge -->
+        <linearGradient id="circR" gradientUnits="userSpaceOnUse" x1="1047" y1="0" x2="1400" y2="0">
+          <stop offset="0%"   stop-color="#B090D8" stop-opacity="1.0"/>
+          <stop offset="40%"  stop-color="#C8A050" stop-opacity="0.94"/>
+          <stop offset="100%" stop-color="#E8C040" stop-opacity="0.85"/>
         </linearGradient>
         <!-- Crystal fill -->
         <radialGradient id="crystalFill" cx="50%" cy="50%" r="50%">
@@ -831,78 +831,95 @@
       <g mask="url(#heroMask)">
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- LEFT CIRCUIT TRACES (teal) flowing x=0 → Metatron at x≈855   -->
-      <!-- Metatron center (960,350), R=100                              -->
-      <!-- Left hex vertices: upper-left (873,300), lower-left (873,400) -->
+      <!-- LEFT CIRCUIT TRACES (teal) — proper PCB path routing          -->
+      <!-- Each trace is a single connected path with 90° elbow turns    -->
+      <!-- Converging toward UL(873,300), LL(873,400), bus y=350         -->
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <g fill="none">
-        <g filter="url(#lineGlow)">
-          <!-- UPPER BUNDLE — converging toward (873,300) -->
-          <line x1="0"   y1="262" x2="820"  y2="262" stroke="url(#circL)" stroke-width="1.0"/>
-          <line x1="0"   y1="273" x2="835"  y2="273" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="155" y1="262" x2="155"  y2="273" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="0"   y1="284" x2="848"  y2="284" stroke="url(#circL)" stroke-width="1.4"/>
-          <line x1="310" y1="273" x2="310"  y2="284" stroke="url(#circL)" stroke-width="1.4"/>
-          <line x1="0"   y1="300" x2="873"  y2="300" stroke="url(#circL)" stroke-width="2.0"/>
-          <line x1="460" y1="284" x2="460"  y2="300" stroke="url(#circL)" stroke-width="1.5"/>
-          <line x1="0"   y1="312" x2="848"  y2="312" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="590" y1="300" x2="590"  y2="312" stroke="url(#circL)" stroke-width="1.2"/>
-          <!-- MAIN BUS -->
-          <line x1="0"   y1="350" x2="855"  y2="350" stroke="url(#circL)" stroke-width="3.2"/>
-          <!-- LOWER BUNDLE — converging toward (873,400) -->
-          <line x1="0"   y1="388" x2="848"  y2="388" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="560" y1="388" x2="560"  y2="400" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="0"   y1="400" x2="873"  y2="400" stroke="url(#circL)" stroke-width="2.0"/>
-          <line x1="430" y1="400" x2="430"  y2="412" stroke="url(#circL)" stroke-width="1.4"/>
-          <line x1="0"   y1="412" x2="848"  y2="412" stroke="url(#circL)" stroke-width="1.4"/>
-          <line x1="285" y1="412" x2="285"  y2="424" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="0"   y1="424" x2="835"  y2="424" stroke="url(#circL)" stroke-width="1.2"/>
-          <line x1="140" y1="424" x2="140"  y2="438" stroke="url(#circL)" stroke-width="1.0"/>
-          <line x1="0"   y1="438" x2="820"  y2="438" stroke="url(#circL)" stroke-width="1.0"/>
-        </g>
-        <!-- PCB component rectangles on left traces -->
-        <rect x="70"  y="258" width="30" height="8" rx="1" fill="#10D4C0" opacity="0.88"/>
-        <rect x="70"  y="269" width="24" height="7" rx="1" fill="#10D4C0" opacity="0.82"/>
-        <rect x="200" y="280" width="28" height="8" rx="1" fill="#14C8B8" opacity="0.88"/>
-        <rect x="370" y="280" width="24" height="7" rx="1" fill="#14C8B8" opacity="0.82"/>
-        <rect x="370" y="296" width="30" height="8" rx="1" fill="#18C0B0" opacity="0.88"/>
-        <rect x="510" y="296" width="28" height="8" rx="1" fill="#1CB8A8" opacity="0.88"/>
-        <rect x="650" y="280" width="24" height="7" rx="1" fill="#20B0A0" opacity="0.82"/>
-        <rect x="720" y="308" width="26" height="7" rx="1" fill="#20B0A0" opacity="0.82"/>
-        <!-- Lower bundle components -->
-        <rect x="80"  y="396" width="30" height="8" rx="1" fill="#10D4C0" opacity="0.88"/>
-        <rect x="80"  y="420" width="24" height="7" rx="1" fill="#10D4C0" opacity="0.82"/>
-        <rect x="210" y="408" width="28" height="8" rx="1" fill="#14C8B8" opacity="0.88"/>
-        <rect x="365" y="396" width="30" height="8" rx="1" fill="#18C0B0" opacity="0.88"/>
-        <rect x="365" y="408" width="24" height="7" rx="1" fill="#18C0B0" opacity="0.82"/>
-        <rect x="500" y="384" width="28" height="8" rx="1" fill="#1CB8A8" opacity="0.88"/>
-        <rect x="640" y="408" width="26" height="7" rx="1" fill="#20B0A0" opacity="0.82"/>
-        <rect x="730" y="434" width="26" height="7" rx="1" fill="#20B0A0" opacity="0.82"/>
-        <!-- Main bus components -->
-        <rect x="170" y="345" width="34" height="10" rx="1" fill="#18C8B8" opacity="0.92"/>
-        <rect x="390" y="345" width="34" height="10" rx="1" fill="#1EC0B0" opacity="0.92"/>
-        <rect x="620" y="345" width="30" height="10" rx="1" fill="#24B8A8" opacity="0.90"/>
-        <!-- Junction dots left -->
-        <circle cx="155" cy="268"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <circle cx="310" cy="278"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <circle cx="460" cy="290"  r="3.0" fill="#18C8B8" opacity="0.95"/>
-        <circle cx="590" cy="306"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <circle cx="140" cy="430"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <circle cx="285" cy="418"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <circle cx="430" cy="406"  r="3.0" fill="#18C8B8" opacity="0.95"/>
-        <circle cx="560" cy="394"  r="2.5" fill="#18C8B8" opacity="0.92"/>
-        <!-- Left-edge terminals -->
-        <circle cx="14" cy="262"  r="2.0" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="14" cy="273"  r="2.6" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="14" cy="284"  r="3.2" stroke="#0ED8C0" stroke-width="1.4" fill="none" opacity="0.85"/>
-        <circle cx="14" cy="300"  r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.92"/>
-        <circle cx="14" cy="312"  r="2.6" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="14" cy="350"  r="6.0" stroke="#0ED8C0" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
-        <circle cx="14" cy="388"  r="2.6" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="14" cy="400"  r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.92"/>
-        <circle cx="14" cy="412"  r="3.2" stroke="#0ED8C0" stroke-width="1.4" fill="none" opacity="0.85"/>
-        <circle cx="14" cy="424"  r="2.6" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="14" cy="438"  r="2.0" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
+      <g fill="none" filter="url(#lineGlow)">
+        <!-- MAIN BUS y=350 straight to Metatron -->
+        <path d="M 0,350 H 855" stroke="url(#circL)" stroke-width="3.0" stroke-linecap="round"/>
+        <!-- UPPER BUNDLE: each path runs horizontal then 90° turn to y=300 -->
+        <path d="M 0,300 H 873"           stroke="url(#circL)" stroke-width="2.0" stroke-linecap="round"/>
+        <path d="M 0,288 H 700 V 300"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 0,276 H 540 V 300"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 0,263 H 375 V 300"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 0,313 H 720 V 300"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 0,325 H 555 V 300"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 0,337 H 390 V 300"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <!-- LOWER BUNDLE: same pattern converging at y=400 -->
+        <path d="M 0,400 H 873"           stroke="url(#circL)" stroke-width="2.0" stroke-linecap="round"/>
+        <path d="M 0,388 H 700 V 400"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 0,375 H 540 V 400"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 0,362 H 375 V 400"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 0,413 H 720 V 400"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 0,426 H 555 V 400"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 0,439 H 390 V 400"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+      </g>
+      <!-- Component blocks sitting ON the traces (same y as each trace, centered) -->
+      <g fill="#0ED8C0" opacity="0.92">
+        <!-- Main bus y=350 -->
+        <rect x="148" y="346" width="22" height="8" rx="1"/>
+        <rect x="358" y="346" width="22" height="8" rx="1"/>
+        <rect x="562" y="346" width="22" height="8" rx="1"/>
+        <rect x="730" y="346" width="18" height="8" rx="1"/>
+        <!-- Upper primary y=300 -->
+        <rect x="122" y="297" width="22" height="6" rx="1"/>
+        <rect x="315" y="297" width="22" height="6" rx="1"/>
+        <rect x="505" y="297" width="20" height="6" rx="1"/>
+        <rect x="672" y="297" width="18" height="6" rx="1"/>
+        <!-- y=288 -->
+        <rect x="185" y="285" width="18" height="5" rx="1"/>
+        <rect x="430" y="285" width="18" height="5" rx="1"/>
+        <rect x="600" y="285" width="16" height="5" rx="1"/>
+        <!-- y=276 -->
+        <rect x="150" y="273" width="16" height="5" rx="1"/>
+        <rect x="332" y="273" width="16" height="5" rx="1"/>
+        <!-- Lower primary y=400 -->
+        <rect x="122" y="397" width="22" height="6" rx="1"/>
+        <rect x="315" y="397" width="22" height="6" rx="1"/>
+        <rect x="505" y="397" width="20" height="6" rx="1"/>
+        <rect x="672" y="397" width="18" height="6" rx="1"/>
+        <!-- y=388 -->
+        <rect x="185" y="385" width="18" height="5" rx="1"/>
+        <rect x="430" y="385" width="18" height="5" rx="1"/>
+        <rect x="600" y="385" width="16" height="5" rx="1"/>
+        <!-- y=375 -->
+        <rect x="150" y="372" width="16" height="5" rx="1"/>
+        <rect x="332" y="372" width="16" height="5" rx="1"/>
+      </g>
+      <!-- Junction dots at each elbow turn (top and bottom of turn) -->
+      <g fill="#18C8B8">
+        <circle cx="700" cy="288" r="2.4" opacity="0.90"/><circle cx="700" cy="300" r="2.4" opacity="0.90"/>
+        <circle cx="540" cy="276" r="2.2" opacity="0.86"/><circle cx="540" cy="300" r="2.2" opacity="0.86"/>
+        <circle cx="375" cy="263" r="2.0" opacity="0.80"/><circle cx="375" cy="300" r="2.0" opacity="0.80"/>
+        <circle cx="720" cy="313" r="2.4" opacity="0.90"/><circle cx="720" cy="300" r="2.4" opacity="0.90"/>
+        <circle cx="555" cy="325" r="2.2" opacity="0.86"/><circle cx="555" cy="300" r="2.2" opacity="0.86"/>
+        <circle cx="390" cy="337" r="2.0" opacity="0.80"/><circle cx="390" cy="300" r="2.0" opacity="0.80"/>
+        <circle cx="700" cy="388" r="2.4" opacity="0.90"/><circle cx="700" cy="400" r="2.4" opacity="0.90"/>
+        <circle cx="540" cy="375" r="2.2" opacity="0.86"/><circle cx="540" cy="400" r="2.2" opacity="0.86"/>
+        <circle cx="375" cy="362" r="2.0" opacity="0.80"/><circle cx="375" cy="400" r="2.0" opacity="0.80"/>
+        <circle cx="720" cy="413" r="2.4" opacity="0.90"/><circle cx="720" cy="400" r="2.4" opacity="0.90"/>
+        <circle cx="555" cy="426" r="2.2" opacity="0.86"/><circle cx="555" cy="400" r="2.2" opacity="0.86"/>
+        <circle cx="390" cy="439" r="2.0" opacity="0.80"/><circle cx="390" cy="400" r="2.0" opacity="0.80"/>
+        <circle cx="425" cy="350" r="3.0" opacity="0.95" filter="url(#nodeGlow)"/>
+      </g>
+      <!-- Left-edge entry terminals -->
+      <g>
+        <circle cx="14" cy="263" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="14" cy="276" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="14" cy="288" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="14" cy="300" r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.94"/>
+        <circle cx="14" cy="313" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="14" cy="325" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="14" cy="337" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="14" cy="350" r="5.5" stroke="#0ED8C0" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
+        <circle cx="14" cy="362" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="14" cy="375" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="14" cy="388" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="14" cy="400" r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.94"/>
+        <circle cx="14" cy="413" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="14" cy="426" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="14" cy="439" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
       </g>
 
       <!-- ══════════════════════════════════════════════════════════════ -->
@@ -993,65 +1010,89 @@
       <circle cx="787"  cy="250" r="4.5"  fill="#A888D8" filter="url(#nodeGlow)" opacity="0.92"/>
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- RIGHT CIRCUIT TRACES (gold) flowing x≈1065 → x=1400           -->
-      <!-- From right hex vertices: UR(1047,300), LR(1047,400)           -->
+      <!-- RIGHT CIRCUIT TRACES (gold) — proper PCB path routing         -->
+      <!-- Each path fans OUT from UR(1047,300) or LR(1047,400)          -->
+      <!-- Structure: M 1047,300/400 H xTurn V yFan H 1400               -->
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <g fill="none">
-        <g filter="url(#lineGlow)">
-          <!-- UPPER BUNDLE from (1047,300) -->
-          <line x1="1047" y1="300" x2="1400" y2="300" stroke="url(#circR)" stroke-width="2.0"/>
-          <line x1="1068" y1="288" x2="1400" y2="288" stroke="url(#circR)" stroke-width="1.4"/>
-          <line x1="1148" y1="288" x2="1148" y2="300" stroke="url(#circR)" stroke-width="1.4"/>
-          <line x1="1080" y1="276" x2="1400" y2="276" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1245" y1="276" x2="1245" y2="288" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1090" y1="262" x2="1400" y2="262" stroke="url(#circR)" stroke-width="1.0"/>
-          <line x1="1062" y1="312" x2="1400" y2="312" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1185" y1="300" x2="1185" y2="312" stroke="url(#circR)" stroke-width="1.2"/>
-          <!-- MAIN BUS -->
-          <line x1="1065" y1="350" x2="1400" y2="350" stroke="url(#circR)" stroke-width="3.2"/>
-          <!-- LOWER BUNDLE from (1047,400) -->
-          <line x1="1047" y1="400" x2="1400" y2="400" stroke="url(#circR)" stroke-width="2.0"/>
-          <line x1="1062" y1="388" x2="1400" y2="388" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1178" y1="388" x2="1178" y2="400" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1068" y1="412" x2="1400" y2="412" stroke="url(#circR)" stroke-width="1.4"/>
-          <line x1="1152" y1="400" x2="1152" y2="412" stroke="url(#circR)" stroke-width="1.4"/>
-          <line x1="1080" y1="424" x2="1400" y2="424" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1268" y1="412" x2="1268" y2="424" stroke="url(#circR)" stroke-width="1.2"/>
-          <line x1="1090" y1="438" x2="1400" y2="438" stroke="url(#circR)" stroke-width="1.0"/>
-        </g>
-        <!-- PCB component rectangles on right traces -->
-        <rect x="1108" y="296" width="30" height="8"  rx="1" fill="#D0A840" opacity="0.88"/>
-        <rect x="1108" y="308" width="24" height="7"  rx="1" fill="#D0A840" opacity="0.82"/>
-        <rect x="1210" y="284" width="28" height="8"  rx="1" fill="#CCA038" opacity="0.88"/>
-        <rect x="1310" y="272" width="26" height="7"  rx="1" fill="#C89830" opacity="0.82"/>
-        <rect x="1330" y="258" width="28" height="8"  rx="1" fill="#C49030" opacity="0.82"/>
-        <rect x="1120" y="396" width="30" height="8"  rx="1" fill="#D0A840" opacity="0.88"/>
-        <rect x="1120" y="408" width="24" height="7"  rx="1" fill="#D0A840" opacity="0.82"/>
-        <rect x="1215" y="384" width="28" height="8"  rx="1" fill="#CCA038" opacity="0.88"/>
-        <rect x="1300" y="408" width="26" height="7"  rx="1" fill="#C89830" opacity="0.82"/>
-        <rect x="1340" y="420" width="28" height="7"  rx="1" fill="#C49030" opacity="0.82"/>
-        <!-- Main bus components -->
-        <rect x="1165" y="345" width="34" height="10" rx="1" fill="#D4A840" opacity="0.92"/>
-        <rect x="1285" y="345" width="30" height="10" rx="1" fill="#D0A038" opacity="0.90"/>
-        <!-- Junction dots right -->
-        <circle cx="1148" cy="294"  r="2.5" fill="#D0A840" opacity="0.92"/>
-        <circle cx="1245" cy="282"  r="2.5" fill="#D0A840" opacity="0.92"/>
-        <circle cx="1185" cy="306"  r="2.5" fill="#D0A840" opacity="0.92"/>
-        <circle cx="1152" cy="406"  r="3.0" fill="#D0A840" opacity="0.95"/>
-        <circle cx="1178" cy="394"  r="2.5" fill="#D0A840" opacity="0.92"/>
-        <circle cx="1268" cy="418"  r="2.5" fill="#D0A840" opacity="0.92"/>
-        <!-- Right-edge terminals -->
-        <circle cx="1386" cy="262"  r="2.0" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="1386" cy="276"  r="2.6" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="1386" cy="288"  r="3.2" stroke="#E8C040" stroke-width="1.4" fill="none" opacity="0.85"/>
-        <circle cx="1386" cy="300"  r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.92"/>
-        <circle cx="1386" cy="312"  r="2.6" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="1386" cy="350"  r="6.0" stroke="#E8C040" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
-        <circle cx="1386" cy="388"  r="2.6" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="1386" cy="400"  r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.92"/>
-        <circle cx="1386" cy="412"  r="3.2" stroke="#E8C040" stroke-width="1.4" fill="none" opacity="0.85"/>
-        <circle cx="1386" cy="424"  r="2.6" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.75"/>
-        <circle cx="1386" cy="438"  r="2.0" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
+      <g fill="none" filter="url(#lineGlow)">
+        <!-- MAIN BUS y=350 straight from Metatron -->
+        <path d="M 1065,350 H 1400" stroke="url(#circR)" stroke-width="3.0" stroke-linecap="round"/>
+        <!-- UPPER BUNDLE fanning out from (1047,300) -->
+        <path d="M 1047,300 H 1400"                        stroke="url(#circR)" stroke-width="2.0" stroke-linecap="round"/>
+        <path d="M 1047,300 H 1100 V 288 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 1047,300 H 1200 V 276 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 1047,300 H 1315 V 263 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 1047,300 H 1100 V 313 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 1047,300 H 1200 V 326 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 1047,300 H 1315 V 337 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <!-- LOWER BUNDLE fanning out from (1047,400) -->
+        <path d="M 1047,400 H 1400"                        stroke="url(#circR)" stroke-width="2.0" stroke-linecap="round"/>
+        <path d="M 1047,400 H 1100 V 388 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 1047,400 H 1200 V 375 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 1047,400 H 1315 V 362 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 1047,400 H 1100 V 413 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 1047,400 H 1200 V 426 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 1047,400 H 1315 V 439 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+      </g>
+      <!-- Component blocks sitting ON the traces -->
+      <g fill="#D4A840" opacity="0.92">
+        <!-- Main bus y=350 -->
+        <rect x="1168" y="346" width="22" height="8" rx="1"/>
+        <rect x="1298" y="346" width="22" height="8" rx="1"/>
+        <!-- Upper primary y=300 -->
+        <rect x="1148" y="297" width="22" height="6" rx="1"/>
+        <rect x="1295" y="297" width="20" height="6" rx="1"/>
+        <!-- y=288 elbow branch -->
+        <rect x="1210" y="285" width="18" height="5" rx="1"/>
+        <rect x="1338" y="285" width="16" height="5" rx="1"/>
+        <!-- y=276 -->
+        <rect x="1265" y="273" width="16" height="5" rx="1"/>
+        <!-- y=313 -->
+        <rect x="1215" y="310" width="18" height="5" rx="1"/>
+        <rect x="1340" y="323" width="16" height="5" rx="1"/>
+        <!-- Lower primary y=400 -->
+        <rect x="1148" y="397" width="22" height="6" rx="1"/>
+        <rect x="1295" y="397" width="20" height="6" rx="1"/>
+        <!-- y=388 -->
+        <rect x="1210" y="385" width="18" height="5" rx="1"/>
+        <rect x="1338" y="372" width="16" height="5" rx="1"/>
+        <!-- y=413 -->
+        <rect x="1215" y="410" width="18" height="5" rx="1"/>
+        <rect x="1340" y="423" width="16" height="5" rx="1"/>
+      </g>
+      <!-- Junction dots at each elbow turn -->
+      <g fill="#D4A840">
+        <circle cx="1100" cy="288" r="2.4" opacity="0.90"/><circle cx="1100" cy="300" r="2.4" opacity="0.90"/>
+        <circle cx="1200" cy="276" r="2.2" opacity="0.86"/><circle cx="1200" cy="300" r="2.2" opacity="0.86"/>
+        <circle cx="1315" cy="263" r="2.0" opacity="0.80"/><circle cx="1315" cy="300" r="2.0" opacity="0.80"/>
+        <circle cx="1100" cy="313" r="2.4" opacity="0.90"/><circle cx="1100" cy="300" r="2.4" opacity="0.90"/>
+        <circle cx="1200" cy="326" r="2.2" opacity="0.86"/><circle cx="1200" cy="300" r="2.2" opacity="0.86"/>
+        <circle cx="1315" cy="337" r="2.0" opacity="0.80"/><circle cx="1315" cy="300" r="2.0" opacity="0.80"/>
+        <circle cx="1100" cy="388" r="2.4" opacity="0.90"/><circle cx="1100" cy="400" r="2.4" opacity="0.90"/>
+        <circle cx="1200" cy="375" r="2.2" opacity="0.86"/><circle cx="1200" cy="400" r="2.2" opacity="0.86"/>
+        <circle cx="1315" cy="362" r="2.0" opacity="0.80"/><circle cx="1315" cy="400" r="2.0" opacity="0.80"/>
+        <circle cx="1100" cy="413" r="2.4" opacity="0.90"/><circle cx="1100" cy="400" r="2.4" opacity="0.90"/>
+        <circle cx="1200" cy="426" r="2.2" opacity="0.86"/><circle cx="1200" cy="400" r="2.2" opacity="0.86"/>
+        <circle cx="1315" cy="439" r="2.0" opacity="0.80"/><circle cx="1315" cy="400" r="2.0" opacity="0.80"/>
+        <circle cx="1220" cy="350" r="3.0" opacity="0.95" filter="url(#nodeGlow)"/>
+      </g>
+      <!-- Right-edge exit terminals -->
+      <g>
+        <circle cx="1386" cy="263" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="1386" cy="276" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="1386" cy="288" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="1386" cy="300" r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.94"/>
+        <circle cx="1386" cy="313" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="1386" cy="326" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="1386" cy="337" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="1386" cy="350" r="5.5" stroke="#E8C040" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
+        <circle cx="1386" cy="362" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
+        <circle cx="1386" cy="375" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="1386" cy="388" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="1386" cy="400" r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.94"/>
+        <circle cx="1386" cy="413" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
+        <circle cx="1386" cy="426" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
+        <circle cx="1386" cy="439" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
       </g>
 
       </g><!-- end heroMask -->
