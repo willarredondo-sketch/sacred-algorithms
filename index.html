@@ -126,20 +126,55 @@
     }
 
     /* ── HOME ───────────────────────────────────────────── */
-    /* #home visibility controlled by section.active rule */
     .hero {
+      --pw: 230px; --ph: 172px;
       position: relative; min-height: 100vh;
-      display: flex; align-items: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #020C1A 0%, var(--navy) 55%, #071830 100%);
+      display: flex; align-items: center; overflow: hidden;
+      background-color: #0C2040;
+      background-image:
+        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(255,255,255,0.09) 0%, transparent 58%),
+        radial-gradient(ellipse 35% 28% at 12% 8%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.065) 0px, rgba(255,255,255,0.065) 1px,
+          transparent 1px, transparent var(--pw)
+        ),
+        repeating-linear-gradient(180deg,
+          rgba(255,255,255,0.055) 0px, rgba(255,255,255,0.055) 1px,
+          transparent 1px, transparent var(--ph)
+        ),
+        linear-gradient(155deg, #0B1F3A 0%, #0D2448 52%, #091C38 100%);
     }
-    .hero-metatron {
-      position: absolute; left: 0; top: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; user-select: none;
-      overflow: hidden;
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(180deg,
+          rgba(255,255,255,0.032) 2px, rgba(255,255,255,0.032) 3px,
+          transparent 3px, transparent var(--ph)
+        ),
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.022) 2px, rgba(255,255,255,0.022) 3px,
+          transparent 3px, transparent var(--pw)
+        ),
+        repeating-linear-gradient(180deg,
+          transparent 0px, transparent calc(var(--ph) - 3px),
+          rgba(0,0,0,0.14) calc(var(--ph) - 3px), rgba(0,0,0,0.14) calc(var(--ph) - 1px),
+          transparent calc(var(--ph) - 1px), transparent var(--ph)
+        );
     }
-    .hero-content { position: relative; z-index: 2; padding: 8rem 0 6rem; max-width: 52%; }
+    .hero-grid {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 2.5rem;
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      min-height: 100vh; align-items: center; gap: 2rem;
+    }
+    .hero-right {
+      display: flex; align-items: center; justify-content: center; align-self: stretch;
+    }
+    .hero-svg {
+      width: 100%; max-width: 780px; height: auto; min-height: 480px;
+      filter: drop-shadow(0 0 8px rgba(192,132,252,0.38));
+    }
+    .hero-content { padding: 8rem 0 6rem; }
     .hero-label {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -152,35 +187,29 @@
     }
     .hero-name {
       font-family: var(--font-brand);
-      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
       font-weight: 400; color: var(--white);
       line-height: 1.05; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      text-transform: uppercase; margin-bottom: 0.75rem;
     }
-    .hero-name em {
-      font-style: normal; color: var(--gold);
-      display: block;
-    }
+    .hero-name em { font-style: normal; color: var(--gold); display: block; }
     .hero-tagline {
-      font-family: var(--font-b);
-      font-weight: 300;
+      font-family: var(--font-b); font-weight: 300;
       font-size: clamp(0.75rem, 1.4vw, 0.95rem);
       color: var(--gold); margin-bottom: 2.5rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.22em; text-transform: uppercase;
     }
     .hero-statement {
       font-family: var(--font-d);
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
       font-weight: 300; color: var(--white);
-      line-height: 1.6; max-width: 620px;
+      line-height: 1.6; max-width: 520px;
       margin-bottom: 1rem; border-left: 2px solid var(--gold);
       padding-left: 1.5rem;
     }
     .hero-sub {
-      font-size: 0.95rem; line-height: 1.85;
-      max-width: 560px; color: var(--text);
+      font-size: 0.92rem; line-height: 1.85;
+      max-width: 500px; color: var(--text);
       margin-bottom: 3rem; padding-left: 1.5rem;
       border-left: 2px solid transparent;
     }
@@ -194,9 +223,7 @@
       background: transparent; font-family: var(--font-b);
     }
     .btn:hover { background: var(--gold); color: var(--navy); }
-    .btn-ghost {
-      border-color: rgba(123,105,168,0.4); color: var(--text);
-    }
+    .btn-ghost { border-color: rgba(123,105,168,0.4); color: var(--text); }
     .btn-ghost:hover { border-color: var(--purple); color: var(--white); background: rgba(123,105,168,0.08); }
     .hero-scroll {
       position: absolute; bottom: 3rem; right: 2.5rem;
@@ -728,7 +755,9 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .form-row { grid-template-columns: 1fr; }
       .stage { grid-template-columns: 3.5rem 1fr; }
-      .hero-metatron { display: none; }
+      .hero-right { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 8rem 0 4rem; }
     }
   </style>
 </head>
@@ -768,337 +797,9 @@
 <section id="home" class="active">
 
   <div class="hero">
-    <!-- Metatron's Cube — glowing with circuit traces -->
-    <svg class="hero-metatron" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
-      <defs>
-        <!-- Soft glow for lines -->
-        <filter id="lineGlow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <!-- Strong glow for nodes -->
-        <filter id="nodeGlow" x="-150%" y="-150%" width="400%" height="400%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <!-- Purple radial for Metatron geometry -->
-        <radialGradient id="mgPurple" cx="50%" cy="50%" r="55%">
-          <stop offset="0%" stop-color="#D8C0FF" stop-opacity="0.98"/>
-          <stop offset="40%" stop-color="#9B7FCC" stop-opacity="0.88"/>
-          <stop offset="100%" stop-color="#C48D59" stop-opacity="0.72"/>
-        </radialGradient>
-        <!-- Left circuit: teal → purple, absolute coords so gradient is consistent across all paths -->
-        <linearGradient id="circL" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="873" y2="0">
-          <stop offset="0%"   stop-color="#0ED8C0" stop-opacity="0.88"/>
-          <stop offset="65%"  stop-color="#30C0B0" stop-opacity="0.94"/>
-          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="1.0"/>
-        </linearGradient>
-        <!-- Right circuit: purple → gold, absolute coords from hex vertex to right edge -->
-        <linearGradient id="circR" gradientUnits="userSpaceOnUse" x1="1047" y1="0" x2="1400" y2="0">
-          <stop offset="0%"   stop-color="#B090D8" stop-opacity="1.0"/>
-          <stop offset="40%"  stop-color="#C8A050" stop-opacity="0.94"/>
-          <stop offset="100%" stop-color="#E8C040" stop-opacity="0.85"/>
-        </linearGradient>
-        <!-- Crystal fill -->
-        <radialGradient id="crystalFill" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#D0B8F8" stop-opacity="0.22"/>
-          <stop offset="55%" stop-color="#9B7FCC" stop-opacity="0.08"/>
-          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0"/>
-        </radialGradient>
-        <!-- Triangle fills -->
-        <linearGradient id="triFillUp" x1="0.5" y1="0" x2="0.5" y2="1">
-          <stop offset="0%" stop-color="#C8A8F0" stop-opacity="0.13"/>
-          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.03"/>
-        </linearGradient>
-        <linearGradient id="triFillDown" x1="0.5" y1="1" x2="0.5" y2="0">
-          <stop offset="0%" stop-color="#D4A870" stop-opacity="0.11"/>
-          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.02"/>
-        </linearGradient>
-        <!-- Gradient mask: fade left side so hero text stays readable -->
-        <linearGradient id="maskGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="white" stop-opacity="0"/>
-          <stop offset="16%"  stop-color="white" stop-opacity="0.06"/>
-          <stop offset="34%"  stop-color="white" stop-opacity="0.28"/>
-          <stop offset="50%"  stop-color="white" stop-opacity="0.68"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0.95"/>
-        </linearGradient>
-        <mask id="heroMask">
-          <rect x="0" y="0" width="1400" height="700" fill="url(#maskGrad)"/>
-        </mask>
-      </defs>
+    <div class="hero-grid">
 
-      <!-- All content faded on left for text readability -->
-      <g mask="url(#heroMask)">
-
-      <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- LEFT CIRCUIT TRACES (teal) — proper PCB path routing          -->
-      <!-- Each trace is a single connected path with 90° elbow turns    -->
-      <!-- Converging toward UL(873,300), LL(873,400), bus y=350         -->
-      <!-- ══════════════════════════════════════════════════════════════ -->
-      <g fill="none" filter="url(#lineGlow)">
-        <!-- MAIN BUS y=350 straight to Metatron -->
-        <path d="M 0,350 H 855" stroke="url(#circL)" stroke-width="3.0" stroke-linecap="round"/>
-        <!-- UPPER BUNDLE: each path runs horizontal then 90° turn to y=300 -->
-        <path d="M 0,300 H 873"           stroke="url(#circL)" stroke-width="2.0" stroke-linecap="round"/>
-        <path d="M 0,288 H 700 V 300"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 0,276 H 540 V 300"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 0,263 H 375 V 300"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <path d="M 0,313 H 720 V 300"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 0,325 H 555 V 300"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 0,337 H 390 V 300"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <!-- LOWER BUNDLE: same pattern converging at y=400 -->
-        <path d="M 0,400 H 873"           stroke="url(#circL)" stroke-width="2.0" stroke-linecap="round"/>
-        <path d="M 0,388 H 700 V 400"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 0,375 H 540 V 400"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 0,362 H 375 V 400"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <path d="M 0,413 H 720 V 400"     stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 0,426 H 555 V 400"     stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 0,439 H 390 V 400"     stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
-      </g>
-      <!-- Component blocks sitting ON the traces (same y as each trace, centered) -->
-      <g fill="#0ED8C0" opacity="0.92">
-        <!-- Main bus y=350 -->
-        <rect x="148" y="346" width="22" height="8" rx="1"/>
-        <rect x="358" y="346" width="22" height="8" rx="1"/>
-        <rect x="562" y="346" width="22" height="8" rx="1"/>
-        <rect x="730" y="346" width="18" height="8" rx="1"/>
-        <!-- Upper primary y=300 -->
-        <rect x="122" y="297" width="22" height="6" rx="1"/>
-        <rect x="315" y="297" width="22" height="6" rx="1"/>
-        <rect x="505" y="297" width="20" height="6" rx="1"/>
-        <rect x="672" y="297" width="18" height="6" rx="1"/>
-        <!-- y=288 -->
-        <rect x="185" y="285" width="18" height="5" rx="1"/>
-        <rect x="430" y="285" width="18" height="5" rx="1"/>
-        <rect x="600" y="285" width="16" height="5" rx="1"/>
-        <!-- y=276 -->
-        <rect x="150" y="273" width="16" height="5" rx="1"/>
-        <rect x="332" y="273" width="16" height="5" rx="1"/>
-        <!-- Lower primary y=400 -->
-        <rect x="122" y="397" width="22" height="6" rx="1"/>
-        <rect x="315" y="397" width="22" height="6" rx="1"/>
-        <rect x="505" y="397" width="20" height="6" rx="1"/>
-        <rect x="672" y="397" width="18" height="6" rx="1"/>
-        <!-- y=388 -->
-        <rect x="185" y="385" width="18" height="5" rx="1"/>
-        <rect x="430" y="385" width="18" height="5" rx="1"/>
-        <rect x="600" y="385" width="16" height="5" rx="1"/>
-        <!-- y=375 -->
-        <rect x="150" y="372" width="16" height="5" rx="1"/>
-        <rect x="332" y="372" width="16" height="5" rx="1"/>
-      </g>
-      <!-- Junction dots at each elbow turn (top and bottom of turn) -->
-      <g fill="#18C8B8">
-        <circle cx="700" cy="288" r="2.4" opacity="0.90"/><circle cx="700" cy="300" r="2.4" opacity="0.90"/>
-        <circle cx="540" cy="276" r="2.2" opacity="0.86"/><circle cx="540" cy="300" r="2.2" opacity="0.86"/>
-        <circle cx="375" cy="263" r="2.0" opacity="0.80"/><circle cx="375" cy="300" r="2.0" opacity="0.80"/>
-        <circle cx="720" cy="313" r="2.4" opacity="0.90"/><circle cx="720" cy="300" r="2.4" opacity="0.90"/>
-        <circle cx="555" cy="325" r="2.2" opacity="0.86"/><circle cx="555" cy="300" r="2.2" opacity="0.86"/>
-        <circle cx="390" cy="337" r="2.0" opacity="0.80"/><circle cx="390" cy="300" r="2.0" opacity="0.80"/>
-        <circle cx="700" cy="388" r="2.4" opacity="0.90"/><circle cx="700" cy="400" r="2.4" opacity="0.90"/>
-        <circle cx="540" cy="375" r="2.2" opacity="0.86"/><circle cx="540" cy="400" r="2.2" opacity="0.86"/>
-        <circle cx="375" cy="362" r="2.0" opacity="0.80"/><circle cx="375" cy="400" r="2.0" opacity="0.80"/>
-        <circle cx="720" cy="413" r="2.4" opacity="0.90"/><circle cx="720" cy="400" r="2.4" opacity="0.90"/>
-        <circle cx="555" cy="426" r="2.2" opacity="0.86"/><circle cx="555" cy="400" r="2.2" opacity="0.86"/>
-        <circle cx="390" cy="439" r="2.0" opacity="0.80"/><circle cx="390" cy="400" r="2.0" opacity="0.80"/>
-        <circle cx="425" cy="350" r="3.0" opacity="0.95" filter="url(#nodeGlow)"/>
-      </g>
-      <!-- Left-edge entry terminals -->
-      <g>
-        <circle cx="14" cy="263" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="14" cy="276" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="14" cy="288" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="14" cy="300" r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.94"/>
-        <circle cx="14" cy="313" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="14" cy="325" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="14" cy="337" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="14" cy="350" r="5.5" stroke="#0ED8C0" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
-        <circle cx="14" cy="362" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="14" cy="375" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="14" cy="388" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="14" cy="400" r="4.2" stroke="#0ED8C0" stroke-width="1.7" fill="none" opacity="0.94"/>
-        <circle cx="14" cy="413" r="2.8" stroke="#0ED8C0" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="14" cy="426" r="2.2" stroke="#0ED8C0" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="14" cy="439" r="1.8" stroke="#0ED8C0" stroke-width="1.0" fill="none" opacity="0.62"/>
-      </g>
-
-      <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- METATRON'S CUBE — center (960, 350), R=100                    -->
-      <!-- Inner ring at R=100: T(960,250) UR(1047,300) LR(1047,400)   -->
-      <!--   B(960,450) LL(873,400) UL(873,300)                         -->
-      <!-- Outer star at 2R=200: T(960,150) UR(1133,250) LR(1133,450) -->
-      <!--   B(960,550) LL(787,450) UL(787,250)                         -->
-      <!-- ══════════════════════════════════════════════════════════════ -->
-
-      <!-- Circles — visible at moderate opacity (as in reference image) -->
-      <!-- Outer 6 circles -->
-      <circle cx="960" cy="150"  r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <circle cx="1133" cy="250" r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <circle cx="1133" cy="450" r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <circle cx="960" cy="550"  r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <circle cx="787" cy="450"  r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <circle cx="787" cy="250"  r="100" stroke="url(#mgPurple)" stroke-width="0.5" opacity="0.30"/>
-      <!-- Inner 7 circles (Flower of Life core) -->
-      <circle cx="960" cy="350"  r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.40" filter="url(#lineGlow)"/>
-      <circle cx="960" cy="250"  r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <circle cx="1047" cy="300" r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <circle cx="1047" cy="400" r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <circle cx="960" cy="450"  r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <circle cx="873" cy="400"  r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <circle cx="873" cy="300"  r="100" stroke="url(#mgPurple)" stroke-width="0.65" opacity="0.38"/>
-      <!-- Small inner circles -->
-      <circle cx="960" cy="350"  r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="960" cy="300"  r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="1003" cy="325" r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="1003" cy="375" r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="960" cy="400"  r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="917" cy="375"  r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-      <circle cx="917" cy="325"  r="50"  stroke="url(#mgPurple)" stroke-width="0.45" opacity="0.26"/>
-
-      <!-- Crystal face fills -->
-      <polygon points="960,150 1133,450 787,450" fill="url(#triFillUp)" opacity="1"/>
-      <polygon points="960,550 1133,250 787,250" fill="url(#triFillDown)" opacity="1"/>
-      <polygon points="960,250 1047,300 1047,400 960,450 873,400 873,300" fill="url(#crystalFill)" opacity="1"/>
-
-      <!-- Geometric star web — bright angular lines -->
-      <!-- Center spokes -->
-      <g stroke="url(#mgPurple)" stroke-width="1.8" opacity="0.98" fill="none" filter="url(#lineGlow)">
-        <line x1="960" y1="350" x2="960"  y2="250"/>
-        <line x1="960" y1="350" x2="1047" y2="300"/>
-        <line x1="960" y1="350" x2="1047" y2="400"/>
-        <line x1="960" y1="350" x2="960"  y2="450"/>
-        <line x1="960" y1="350" x2="873"  y2="400"/>
-        <line x1="960" y1="350" x2="873"  y2="300"/>
-      </g>
-      <!-- Full cross-web -->
-      <g stroke="url(#mgPurple)" stroke-width="1.15" opacity="0.90" fill="none" filter="url(#lineGlow)">
-        <line x1="960"  y1="250" x2="1047" y2="400"/>
-        <line x1="960"  y1="250" x2="873"  y2="400"/>
-        <line x1="960"  y1="250" x2="960"  y2="450"/>
-        <line x1="1047" y1="300" x2="873"  y2="300"/>
-        <line x1="1047" y1="300" x2="873"  y2="400"/>
-        <line x1="1047" y1="300" x2="960"  y2="450"/>
-        <line x1="1047" y1="400" x2="873"  y2="400"/>
-        <line x1="1047" y1="400" x2="873"  y2="300"/>
-        <line x1="1047" y1="400" x2="960"  y2="250"/>
-        <line x1="960"  y1="450" x2="873"  y2="300"/>
-        <line x1="960"  y1="450" x2="1047" y2="300"/>
-        <line x1="873"  y1="400" x2="1047" y2="300"/>
-      </g>
-      <!-- Inner hexagon -->
-      <polygon points="960,250 1047,300 1047,400 960,450 873,400 873,300" stroke="url(#mgPurple)" stroke-width="2.6" opacity="1.0" fill="none" filter="url(#lineGlow)"/>
-      <!-- Star of David triangles -->
-      <polygon points="960,150 1133,450 787,450" stroke="url(#mgPurple)" stroke-width="2.4" opacity="0.96" fill="none" filter="url(#lineGlow)"/>
-      <polygon points="960,550 1133,250 787,250" stroke="url(#mgPurple)" stroke-width="2.4" opacity="0.96" fill="none" filter="url(#lineGlow)"/>
-      <!-- Outer hexagon -->
-      <polygon points="960,150 1133,250 1133,450 960,550 787,450 787,250" stroke="url(#mgPurple)" stroke-width="1.0" opacity="0.68" fill="none" filter="url(#lineGlow)"/>
-
-      <!-- Nodes -->
-      <circle cx="960"  cy="350" r="6.5"  fill="#E0C8FF" filter="url(#nodeGlow)" opacity="1.0"/>
-      <circle cx="960"  cy="250" r="4.8"  fill="#D0A8F8" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="1047" cy="300" r="4.8"  fill="#D4A870" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="1047" cy="400" r="4.8"  fill="#D4A870" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="960"  cy="450" r="4.8"  fill="#D0A8F8" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="873"  cy="400" r="4.8"  fill="#A888D8" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="873"  cy="300" r="4.8"  fill="#A888D8" filter="url(#nodeGlow)" opacity="0.96"/>
-      <!-- Outer star point nodes -->
-      <circle cx="960"  cy="150" r="5.2"  fill="#D8C0FF" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="1133" cy="250" r="4.5"  fill="#D4A870" filter="url(#nodeGlow)" opacity="0.92"/>
-      <circle cx="1133" cy="450" r="4.5"  fill="#D4A870" filter="url(#nodeGlow)" opacity="0.92"/>
-      <circle cx="960"  cy="550" r="5.2"  fill="#D8C0FF" filter="url(#nodeGlow)" opacity="0.96"/>
-      <circle cx="787"  cy="450" r="4.5"  fill="#A888D8" filter="url(#nodeGlow)" opacity="0.92"/>
-      <circle cx="787"  cy="250" r="4.5"  fill="#A888D8" filter="url(#nodeGlow)" opacity="0.92"/>
-
-      <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- RIGHT CIRCUIT TRACES (gold) — proper PCB path routing         -->
-      <!-- Each path fans OUT from UR(1047,300) or LR(1047,400)          -->
-      <!-- Structure: M 1047,300/400 H xTurn V yFan H 1400               -->
-      <!-- ══════════════════════════════════════════════════════════════ -->
-      <g fill="none" filter="url(#lineGlow)">
-        <!-- MAIN BUS y=350 straight from Metatron -->
-        <path d="M 1065,350 H 1400" stroke="url(#circR)" stroke-width="3.0" stroke-linecap="round"/>
-        <!-- UPPER BUNDLE fanning out from (1047,300) -->
-        <path d="M 1047,300 H 1400"                        stroke="url(#circR)" stroke-width="2.0" stroke-linecap="round"/>
-        <path d="M 1047,300 H 1100 V 288 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 1047,300 H 1200 V 276 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 1047,300 H 1315 V 263 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <path d="M 1047,300 H 1100 V 313 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 1047,300 H 1200 V 326 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 1047,300 H 1315 V 337 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <!-- LOWER BUNDLE fanning out from (1047,400) -->
-        <path d="M 1047,400 H 1400"                        stroke="url(#circR)" stroke-width="2.0" stroke-linecap="round"/>
-        <path d="M 1047,400 H 1100 V 388 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 1047,400 H 1200 V 375 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 1047,400 H 1315 V 362 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
-        <path d="M 1047,400 H 1100 V 413 H 1400"          stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
-        <path d="M 1047,400 H 1200 V 426 H 1400"          stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
-        <path d="M 1047,400 H 1315 V 439 H 1400"          stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
-      </g>
-      <!-- Component blocks sitting ON the traces -->
-      <g fill="#D4A840" opacity="0.92">
-        <!-- Main bus y=350 -->
-        <rect x="1168" y="346" width="22" height="8" rx="1"/>
-        <rect x="1298" y="346" width="22" height="8" rx="1"/>
-        <!-- Upper primary y=300 -->
-        <rect x="1148" y="297" width="22" height="6" rx="1"/>
-        <rect x="1295" y="297" width="20" height="6" rx="1"/>
-        <!-- y=288 elbow branch -->
-        <rect x="1210" y="285" width="18" height="5" rx="1"/>
-        <rect x="1338" y="285" width="16" height="5" rx="1"/>
-        <!-- y=276 -->
-        <rect x="1265" y="273" width="16" height="5" rx="1"/>
-        <!-- y=313 -->
-        <rect x="1215" y="310" width="18" height="5" rx="1"/>
-        <rect x="1340" y="323" width="16" height="5" rx="1"/>
-        <!-- Lower primary y=400 -->
-        <rect x="1148" y="397" width="22" height="6" rx="1"/>
-        <rect x="1295" y="397" width="20" height="6" rx="1"/>
-        <!-- y=388 -->
-        <rect x="1210" y="385" width="18" height="5" rx="1"/>
-        <rect x="1338" y="372" width="16" height="5" rx="1"/>
-        <!-- y=413 -->
-        <rect x="1215" y="410" width="18" height="5" rx="1"/>
-        <rect x="1340" y="423" width="16" height="5" rx="1"/>
-      </g>
-      <!-- Junction dots at each elbow turn -->
-      <g fill="#D4A840">
-        <circle cx="1100" cy="288" r="2.4" opacity="0.90"/><circle cx="1100" cy="300" r="2.4" opacity="0.90"/>
-        <circle cx="1200" cy="276" r="2.2" opacity="0.86"/><circle cx="1200" cy="300" r="2.2" opacity="0.86"/>
-        <circle cx="1315" cy="263" r="2.0" opacity="0.80"/><circle cx="1315" cy="300" r="2.0" opacity="0.80"/>
-        <circle cx="1100" cy="313" r="2.4" opacity="0.90"/><circle cx="1100" cy="300" r="2.4" opacity="0.90"/>
-        <circle cx="1200" cy="326" r="2.2" opacity="0.86"/><circle cx="1200" cy="300" r="2.2" opacity="0.86"/>
-        <circle cx="1315" cy="337" r="2.0" opacity="0.80"/><circle cx="1315" cy="300" r="2.0" opacity="0.80"/>
-        <circle cx="1100" cy="388" r="2.4" opacity="0.90"/><circle cx="1100" cy="400" r="2.4" opacity="0.90"/>
-        <circle cx="1200" cy="375" r="2.2" opacity="0.86"/><circle cx="1200" cy="400" r="2.2" opacity="0.86"/>
-        <circle cx="1315" cy="362" r="2.0" opacity="0.80"/><circle cx="1315" cy="400" r="2.0" opacity="0.80"/>
-        <circle cx="1100" cy="413" r="2.4" opacity="0.90"/><circle cx="1100" cy="400" r="2.4" opacity="0.90"/>
-        <circle cx="1200" cy="426" r="2.2" opacity="0.86"/><circle cx="1200" cy="400" r="2.2" opacity="0.86"/>
-        <circle cx="1315" cy="439" r="2.0" opacity="0.80"/><circle cx="1315" cy="400" r="2.0" opacity="0.80"/>
-        <circle cx="1220" cy="350" r="3.0" opacity="0.95" filter="url(#nodeGlow)"/>
-      </g>
-      <!-- Right-edge exit terminals -->
-      <g>
-        <circle cx="1386" cy="263" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="1386" cy="276" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="1386" cy="288" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="1386" cy="300" r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.94"/>
-        <circle cx="1386" cy="313" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="1386" cy="326" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="1386" cy="337" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="1386" cy="350" r="5.5" stroke="#E8C040" stroke-width="2.4" fill="none" opacity="0.98" filter="url(#nodeGlow)"/>
-        <circle cx="1386" cy="362" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
-        <circle cx="1386" cy="375" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="1386" cy="388" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="1386" cy="400" r="4.2" stroke="#E8C040" stroke-width="1.7" fill="none" opacity="0.94"/>
-        <circle cx="1386" cy="413" r="2.8" stroke="#E8C040" stroke-width="1.3" fill="none" opacity="0.84"/>
-        <circle cx="1386" cy="426" r="2.2" stroke="#E8C040" stroke-width="1.2" fill="none" opacity="0.74"/>
-        <circle cx="1386" cy="439" r="1.8" stroke="#E8C040" stroke-width="1.0" fill="none" opacity="0.62"/>
-      </g>
-
-      </g><!-- end heroMask -->
-    </svg>
-
-    <div class="container">
+      <!-- ── LEFT COLUMN: Text ──────────────────────────── -->
       <div class="hero-content">
         <div class="hero-label">A Movement for Human-Centered Technology</div>
         <h1 class="hero-name">Sacred<br><em>Algorithms</em></h1>
@@ -1114,7 +815,260 @@
           <a class="btn btn-ghost" href="#" onclick="return show('contact')">Work With Will</a>
         </div>
       </div>
-    </div>
+
+      <!-- ── RIGHT COLUMN: Metatron + Circuit SVG ──────── -->
+      <div class="hero-right">
+        <svg class="hero-svg" viewBox="0 0 780 640" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+      <defs>
+        <!-- Glow for lines -->
+        <filter id="lineGlow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Strong glow for nodes -->
+        <filter id="nodeGlow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Metatron geometry: purple center → gold edges -->
+        <radialGradient id="mgGrad" cx="50%" cy="50%" r="55%" gradientUnits="objectBoundingBox">
+          <stop offset="0%"   stop-color="#EED8FF" stop-opacity="0.98"/>
+          <stop offset="30%"  stop-color="#C084FC" stop-opacity="0.92"/>
+          <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.82"/>
+        </radialGradient>
+        <!-- Left circuit: gold at terminal (x=30) → purple at Metatron (x=330) -->
+        <linearGradient id="circL" gradientUnits="userSpaceOnUse" x1="30" y1="0" x2="330" y2="0">
+          <stop offset="0%"   stop-color="#FBBF24" stop-opacity="0.82"/>
+          <stop offset="55%"  stop-color="#D4A0F0" stop-opacity="0.90"/>
+          <stop offset="100%" stop-color="#C084FC" stop-opacity="1.0"/>
+        </linearGradient>
+        <!-- Right circuit: purple at Metatron (x=530) → gold at terminal (x=760) -->
+        <linearGradient id="circR" gradientUnits="userSpaceOnUse" x1="530" y1="0" x2="760" y2="0">
+          <stop offset="0%"   stop-color="#C084FC" stop-opacity="1.0"/>
+          <stop offset="45%"  stop-color="#D4A0F0" stop-opacity="0.90"/>
+          <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.82"/>
+        </linearGradient>
+        <!-- Crystal + triangle fills -->
+        <radialGradient id="crystalFill" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#C084FC" stop-opacity="0.16"/>
+          <stop offset="55%"  stop-color="#9B6FD8" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#9B6FD8" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="triFillUp" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#C8A8F0" stop-opacity="0.13"/>
+          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.03"/>
+        </linearGradient>
+        <linearGradient id="triFillDown" x1="0.5" y1="1" x2="0.5" y2="0">
+          <stop offset="0%" stop-color="#D4A870" stop-opacity="0.11"/>
+          <stop offset="100%" stop-color="#9B7FCC" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+
+      <!-- SVG content begins -->
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- LEFT CIRCUIT TRACES — compact PCB fanout                   -->
+      <!-- Converging toward UL(330,263) and LL(330,377)              -->
+      <!-- Terminal circles at x=30; Metatron vertices at x=330       -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- LEFT CIRCUIT TRACES — compact PCB fanout           -->
+      <!-- Upper cluster → UL(330,263); Lower → LL(330,377)  -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <g fill="none" filter="url(#lineGlow)">
+        <!-- UPPER CLUSTER → UL(330,263) -->
+        <path d="M 30,263 H 330"        stroke="url(#circL)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M 30,248 H 165 V 263"  stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 30,234 H 115 V 263"  stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 30,220 H 78  V 263"  stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 30,278 H 178 V 263"  stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 30,292 H 128 V 263"  stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 30,306 H 85  V 263"  stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <!-- LOWER CLUSTER → LL(330,377) -->
+        <path d="M 30,377 H 330"        stroke="url(#circL)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M 30,362 H 165 V 377"  stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 30,348 H 115 V 377"  stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 30,334 H 78  V 377"  stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 30,392 H 178 V 377"  stroke="url(#circL)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 30,406 H 128 V 377"  stroke="url(#circL)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 30,420 H 85  V 377"  stroke="url(#circL)" stroke-width="1.0" stroke-linejoin="miter"/>
+      </g>
+      <!-- Left terminal circles -->
+      <g stroke="url(#circL)" fill="none">
+        <circle cx="30" cy="220" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="30" cy="234" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="30" cy="248" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="30" cy="263" r="5.8" stroke-width="1.6" opacity="0.96" filter="url(#nodeGlow)"/>
+        <circle cx="30" cy="278" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="30" cy="292" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="30" cy="306" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="30" cy="334" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="30" cy="348" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="30" cy="362" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="30" cy="377" r="5.8" stroke-width="1.6" opacity="0.96" filter="url(#nodeGlow)"/>
+        <circle cx="30" cy="392" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="30" cy="406" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="30" cy="420" r="3.0" stroke-width="1.0" opacity="0.70"/>
+      </g>
+      <!-- Left elbow junction dots -->
+      <g fill="#C084FC">
+        <circle cx="165" cy="248" r="2.0" opacity="0.84"/><circle cx="165" cy="263" r="2.0" opacity="0.84"/>
+        <circle cx="115" cy="234" r="1.8" opacity="0.76"/><circle cx="115" cy="263" r="1.8" opacity="0.76"/>
+        <circle cx="78"  cy="220" r="1.5" opacity="0.68"/><circle cx="78"  cy="263" r="1.5" opacity="0.68"/>
+        <circle cx="178" cy="278" r="2.0" opacity="0.84"/><circle cx="178" cy="263" r="2.0" opacity="0.84"/>
+        <circle cx="128" cy="292" r="1.8" opacity="0.76"/><circle cx="128" cy="263" r="1.8" opacity="0.76"/>
+        <circle cx="85"  cy="306" r="1.5" opacity="0.68"/><circle cx="85"  cy="263" r="1.5" opacity="0.68"/>
+        <circle cx="165" cy="362" r="2.0" opacity="0.84"/><circle cx="165" cy="377" r="2.0" opacity="0.84"/>
+        <circle cx="115" cy="348" r="1.8" opacity="0.76"/><circle cx="115" cy="377" r="1.8" opacity="0.76"/>
+        <circle cx="78"  cy="334" r="1.5" opacity="0.68"/><circle cx="78"  cy="377" r="1.5" opacity="0.68"/>
+        <circle cx="178" cy="392" r="2.0" opacity="0.84"/><circle cx="178" cy="377" r="2.0" opacity="0.84"/>
+        <circle cx="128" cy="406" r="1.8" opacity="0.76"/><circle cx="128" cy="377" r="1.8" opacity="0.76"/>
+        <circle cx="85"  cy="420" r="1.5" opacity="0.68"/><circle cx="85"  cy="377" r="1.5" opacity="0.68"/>
+      </g>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- METATRON'S CUBE                                     -->
+      <!-- Center (430,320), R=115                            -->
+      <!-- Inner hex: T(430,205) UR(530,263) LR(530,377)     -->
+      <!--   B(430,435) LL(330,377) UL(330,263)              -->
+      <!-- Outer star: T(430,90) UR(629,205) LR(629,435)     -->
+      <!--   B(430,550) LL(231,435) UL(231,205)              -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- Outer 6 Flower of Life circles (subtle) -->
+      <circle cx="430" cy="90"  r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <circle cx="629" cy="205" r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <circle cx="629" cy="435" r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <circle cx="430" cy="550" r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <circle cx="231" cy="435" r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <circle cx="231" cy="205" r="115" stroke="url(#mgGrad)" stroke-width="0.5" opacity="0.22"/>
+      <!-- Inner 7 circles (Flower of Life core) -->
+      <circle cx="430" cy="320" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.40" filter="url(#lineGlow)"/>
+      <circle cx="430" cy="205" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <circle cx="530" cy="263" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <circle cx="530" cy="377" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <circle cx="430" cy="435" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <circle cx="330" cy="377" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <circle cx="330" cy="263" r="115" stroke="url(#mgGrad)" stroke-width="0.68" opacity="0.36"/>
+      <!-- Small inner Flower of Life ring -->
+      <circle cx="430" cy="320" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="430" cy="263" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="479" cy="291" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="479" cy="349" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="430" cy="377" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="381" cy="349" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <circle cx="381" cy="291" r="57" stroke="url(#mgGrad)" stroke-width="0.45" opacity="0.24"/>
+      <!-- Crystal face fills -->
+      <polygon points="430,90 629,435 231,435"  fill="url(#triFillUp)"   opacity="1"/>
+      <polygon points="430,550 629,205 231,205" fill="url(#triFillDown)" opacity="1"/>
+      <polygon points="430,205 530,263 530,377 430,435 330,377 330,263" fill="url(#crystalFill)" opacity="1"/>
+      <!-- Center spokes -->
+      <g stroke="url(#mgGrad)" stroke-width="1.8" opacity="0.97" fill="none" filter="url(#lineGlow)">
+        <line x1="430" y1="320" x2="430" y2="205"/>
+        <line x1="430" y1="320" x2="530" y2="263"/>
+        <line x1="430" y1="320" x2="530" y2="377"/>
+        <line x1="430" y1="320" x2="430" y2="435"/>
+        <line x1="430" y1="320" x2="330" y2="377"/>
+        <line x1="430" y1="320" x2="330" y2="263"/>
+      </g>
+      <!-- Full cross-web -->
+      <g stroke="url(#mgGrad)" stroke-width="1.1" opacity="0.88" fill="none" filter="url(#lineGlow)">
+        <line x1="430" y1="205" x2="530" y2="377"/>
+        <line x1="430" y1="205" x2="330" y2="377"/>
+        <line x1="430" y1="205" x2="430" y2="435"/>
+        <line x1="530" y1="263" x2="330" y2="263"/>
+        <line x1="530" y1="263" x2="330" y2="377"/>
+        <line x1="530" y1="263" x2="430" y2="435"/>
+        <line x1="530" y1="377" x2="330" y2="377"/>
+        <line x1="530" y1="377" x2="330" y2="263"/>
+        <line x1="530" y1="377" x2="430" y2="205"/>
+        <line x1="430" y1="435" x2="330" y2="263"/>
+        <line x1="430" y1="435" x2="530" y2="263"/>
+        <line x1="330" y1="377" x2="530" y2="263"/>
+      </g>
+      <!-- Inner hexagon -->
+      <polygon points="430,205 530,263 530,377 430,435 330,377 330,263" stroke="url(#mgGrad)" stroke-width="2.4" opacity="0.98" fill="none" filter="url(#lineGlow)"/>
+      <!-- Star of David triangles -->
+      <polygon points="430,90 629,435 231,435"  stroke="url(#mgGrad)" stroke-width="2.2" opacity="0.95" fill="none" filter="url(#lineGlow)"/>
+      <polygon points="430,550 629,205 231,205" stroke="url(#mgGrad)" stroke-width="2.2" opacity="0.95" fill="none" filter="url(#lineGlow)"/>
+      <!-- Outer hexagon -->
+      <polygon points="430,90 629,205 629,435 430,550 231,435 231,205" stroke="url(#mgGrad)" stroke-width="1.0" opacity="0.58" fill="none" filter="url(#lineGlow)"/>
+      <!-- Glowing nodes -->
+      <circle cx="430" cy="320" r="6.2" fill="#EED8FF" filter="url(#nodeGlow)" opacity="1.0"/>
+      <circle cx="430" cy="205" r="4.6" fill="#D0B0F8" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="530" cy="263" r="4.6" fill="#FBBF24" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="530" cy="377" r="4.6" fill="#FBBF24" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="430" cy="435" r="4.6" fill="#D0B0F8" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="330" cy="377" r="4.6" fill="#C084FC" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="330" cy="263" r="4.6" fill="#C084FC" filter="url(#nodeGlow)" opacity="0.96"/>
+      <circle cx="430" cy="90"  r="4.8" fill="#E0CCFF" filter="url(#nodeGlow)" opacity="0.92"/>
+      <circle cx="629" cy="205" r="4.0" fill="#FBBF24" filter="url(#nodeGlow)" opacity="0.90"/>
+      <circle cx="629" cy="435" r="4.0" fill="#FBBF24" filter="url(#nodeGlow)" opacity="0.90"/>
+      <circle cx="430" cy="550" r="4.8" fill="#E0CCFF" filter="url(#nodeGlow)" opacity="0.92"/>
+      <circle cx="231" cy="435" r="4.0" fill="#C084FC" filter="url(#nodeGlow)" opacity="0.88"/>
+      <circle cx="231" cy="205" r="4.0" fill="#C084FC" filter="url(#nodeGlow)" opacity="0.88"/>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- RIGHT CIRCUIT TRACES — compact PCB fanout          -->
+      <!-- Upper cluster from UR(530,263); Lower from LR(530,377) -->
+      <!-- Terminal circles at x=760                          -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <g fill="none" filter="url(#lineGlow)">
+        <!-- UPPER CLUSTER fanning from UR(530,263) -->
+        <path d="M 530,263 H 760"               stroke="url(#circR)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M 530,263 H 595 V 248 H 760"   stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 530,263 H 645 V 234 H 760"   stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 530,263 H 682 V 220 H 760"   stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 530,263 H 595 V 278 H 760"   stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 530,263 H 645 V 292 H 760"   stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 530,263 H 682 V 306 H 760"   stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <!-- LOWER CLUSTER fanning from LR(530,377) -->
+        <path d="M 530,377 H 760"               stroke="url(#circR)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M 530,377 H 595 V 362 H 760"   stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 530,377 H 645 V 348 H 760"   stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 530,377 H 682 V 334 H 760"   stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+        <path d="M 530,377 H 595 V 392 H 760"   stroke="url(#circR)" stroke-width="1.4" stroke-linejoin="miter"/>
+        <path d="M 530,377 H 645 V 406 H 760"   stroke="url(#circR)" stroke-width="1.2" stroke-linejoin="miter"/>
+        <path d="M 530,377 H 682 V 420 H 760"   stroke="url(#circR)" stroke-width="1.0" stroke-linejoin="miter"/>
+      </g>
+      <!-- Right terminal circles -->
+      <g stroke="url(#circR)" fill="none">
+        <circle cx="760" cy="220" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="760" cy="234" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="760" cy="248" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="760" cy="263" r="5.8" stroke-width="1.6" opacity="0.96" filter="url(#nodeGlow)"/>
+        <circle cx="760" cy="278" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="760" cy="292" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="760" cy="306" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="760" cy="334" r="3.0" stroke-width="1.0" opacity="0.70"/>
+        <circle cx="760" cy="348" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="760" cy="362" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="760" cy="377" r="5.8" stroke-width="1.6" opacity="0.96" filter="url(#nodeGlow)"/>
+        <circle cx="760" cy="392" r="4.2" stroke-width="1.2" opacity="0.86"/>
+        <circle cx="760" cy="406" r="3.5" stroke-width="1.1" opacity="0.78"/>
+        <circle cx="760" cy="420" r="3.0" stroke-width="1.0" opacity="0.70"/>
+      </g>
+      <!-- Right elbow junction dots -->
+      <g fill="#FBBF24">
+        <circle cx="595" cy="248" r="2.0" opacity="0.84"/><circle cx="595" cy="263" r="2.0" opacity="0.84"/>
+        <circle cx="645" cy="234" r="1.8" opacity="0.76"/><circle cx="645" cy="263" r="1.8" opacity="0.76"/>
+        <circle cx="682" cy="220" r="1.5" opacity="0.68"/><circle cx="682" cy="263" r="1.5" opacity="0.68"/>
+        <circle cx="595" cy="278" r="2.0" opacity="0.84"/><circle cx="595" cy="263" r="2.0" opacity="0.84"/>
+        <circle cx="645" cy="292" r="1.8" opacity="0.76"/><circle cx="645" cy="263" r="1.8" opacity="0.76"/>
+        <circle cx="682" cy="306" r="1.5" opacity="0.68"/><circle cx="682" cy="263" r="1.5" opacity="0.68"/>
+        <circle cx="595" cy="362" r="2.0" opacity="0.84"/><circle cx="595" cy="377" r="2.0" opacity="0.84"/>
+        <circle cx="645" cy="348" r="1.8" opacity="0.76"/><circle cx="645" cy="377" r="1.8" opacity="0.76"/>
+        <circle cx="682" cy="334" r="1.5" opacity="0.68"/><circle cx="682" cy="377" r="1.5" opacity="0.68"/>
+        <circle cx="595" cy="392" r="2.0" opacity="0.84"/><circle cx="595" cy="377" r="2.0" opacity="0.84"/>
+        <circle cx="645" cy="406" r="1.8" opacity="0.76"/><circle cx="645" cy="377" r="1.8" opacity="0.76"/>
+        <circle cx="682" cy="420" r="1.5" opacity="0.68"/><circle cx="682" cy="377" r="1.5" opacity="0.68"/>
+      </g>
+
+      <!-- 4-point star accent -->
+      <path d="M 748,555 L 754,549 L 760,555 L 754,561 Z" fill="#FBBF24" opacity="0.55"/>
+
+      </svg>
+      </div><!-- end .hero-right -->
+    </div><!-- end .hero-grid -->
     <div class="hero-scroll" onclick="show('movement')">Discover</div>
   </div>
 
