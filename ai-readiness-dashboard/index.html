@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Unlisted page: reachable by direct link only. Not linked from nav, footer or a sitemap. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>AI Readiness Dashboard | Sacred Algorithms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS (match index.html) ──────────────────────── */
+    :root {
+      --navy:      #051C3A;
+      --purple:    #7B69A8;
+      --gold:      #C48D59;
+      --gold-lt:   #D4A070;
+      --white:     #F4F1EC;
+      --text:      #CCCAD4;
+      --muted:     #8E8A98;
+      --border:    rgba(123,105,168,0.22);
+      --card-bg:   rgba(255,255,255,0.035);
+      --font-b: 'Montserrat', system-ui, sans-serif;
+      --font-brand: 'Cinzel', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-lt); }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(5,28,58,0.94);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      font-family: var(--font-brand);
+      font-size: 1rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .brand span {
+      display: block;
+      font-family: var(--font-b);
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-top: 2px;
+    }
+    .brand:hover { color: var(--white); }
+
+    /* ── MAIN ───────────────────────────────────────────── */
+    main { flex: 1; width: 100%; max-width: 1400px; margin: 0 auto; padding: 3.5rem 2.5rem 4rem; }
+    .label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .divider {
+      width: 48px; height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* Responsive 16:9 frame; Power BI adds a ~36px nav bar under the report. */
+    .embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      padding-bottom: 36px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    .embed iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .embed-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem; color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      header { padding: 1rem 1rem; }
+      main { padding: 2.5rem 1rem 3rem; }
+      .embed { aspect-ratio: 4 / 5; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">
+    Sacred Algorithms
+    <span>Where Soul Meets Strategy</span>
+  </a>
+</header>
+
+<main>
+  <p class="label">Human-First AI Readiness</p>
+  <h1>AI Readiness Dashboard</h1>
+  <div class="divider"></div>
+
+  <div class="embed" id="dashboard-embed">
+    <div class="embed-placeholder" id="dashboard-placeholder">The dashboard is loading soon.</div>
+  </div>
+</main>
+
+<footer>© 2026 Sacred Algorithms · Founded by Will Arredondo · All rights reserved</footer>
+
+<script>
+  // ── POWER BI EMBED ─────────────────────────────────────
+  // Paste the src URL from Power BI's "Publish to web" iframe code here,
+  // e.g. "https://app.powerbi.com/view?r=...". Leave empty to show the placeholder.
+  const POWERBI_EMBED_SRC = "";
+
+  if (POWERBI_EMBED_SRC) {
+    const frame = document.createElement('iframe');
+    frame.title = 'AI Readiness Dashboard';
+    frame.src = POWERBI_EMBED_SRC;
+    frame.allowFullscreen = true;
+    frame.loading = 'lazy';
+    document.getElementById('dashboard-placeholder').remove();
+    document.getElementById('dashboard-embed').appendChild(frame);
+  }
+</script>
+
+</body>
+</html>
